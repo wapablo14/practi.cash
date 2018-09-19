@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="js/validar.js"></script>
 
 
 <style>
@@ -129,11 +128,11 @@
              <i class=" icono far fa-user-circle "> <strong >Registro</strong> </i>
             </div>                
           </div>
-        <input id="num" class="form-control" type="text"  onkeypress="return solonumeros(event);" placeholder="Numero">
+        <input id="num" class="form-control" type="text"   placeholder="Numero">
         <br>
-        <input  class="form-control"  type="text" onkeypress="return sololetras(event);" onpaste="return false" placeholder="Nombre">
+        <input  class="form-control"  type="text" onpaste="return false" placeholder="Nombre">
         <br>
-        <input class="form-control"  type="text" onkeypress="return sololetras(event);" onpaste="return false" placeholder="Apellido">
+        <input class="form-control"  type="text" onpaste="return false" placeholder="Apellido">
         <br>
         <input class="form-control"  type="password" placeholder="Contraseña">
         <br>
@@ -150,7 +149,7 @@
             </div>
           </div>
           <br>    
-		  <input type="button" class="form-control" id="btnRegistro"value="Registrar">
+		  <button type="submit" class="form-control" id="btnRegistro">Boton</button>
 			</div>
 				<div class="col-xs-1">
 		    </div>
@@ -160,8 +159,21 @@
 	</div> 
 </div>
 
-    <script type="text/javascript" src="cordova.js"></script>
-    
+<script type="text/javascript" src="cordova.js"></script>
+<script>
+	$(document).ready(function(){
+    $("#btnRegistro").click(function(){
+		if($('#switch').is(':checked')){
+				window.location.href = "tarjetas.html";
+			}
+			else{
+				alert('Registro exitoso');
+				window.location.href = "usuario.html";
+			}
+		});
+    });
+		
+	</script>
 </body>
 
 </html>

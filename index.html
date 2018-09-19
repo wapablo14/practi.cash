@@ -1,136 +1,46 @@
 <!DOCTYPE html>
 <html>
-    <head>
-		<title>Pagina ejemplo.</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
-		<style>
-	/*Body fondo.*/
-	body {
-		background-image: url("img/fondo.png");
-		background-position: center center;
-		background-repeat: no-repeat;
-		background-attachment; fixed;
-		background-size: cover;
-	}
-	/*Logo practisis cash.*/
-	img{
-		width: 190px;
-		height: 190px;
-		margin: 50px auto;
-		display: block;
-	}
-	/*texto principal.*/
-	 #titulo{
-		font-size: 17px;
-		color: white;
-		text-align: center;
-	}
-	/*Input menu principal*/
-	input[type=text]{
-		height: 50px;
-		width: 100%;
-		font-size: 17px;
-		margin: 15px auto;
-		border: 15px;
-		border-radius: 15px;
-	}
-	/*Boton menu principal*/
-	input[type=button] {
-		width: 100%;
-		height: 50px;
-		font-size: 17px;
-		margin: 10px auto;
-		border: 25px ;
-		border-radius: 25px;
-		background-color: #0174DF;
-		color: white;
-	}
-	.error{
-		color: white;
-		position: relative;
-		left: 330px;
-	}
-    
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .row.content {height:auto;} 
-    }
-  </style>
-	</head>
-    <body>
+<head>
+		
+	<title>Pagina ejemplo.</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+	
+</head>
+
+<body>
+
 <div class="container-fluid">
 	<div class="row content">
 		<div class="col-xs-1">
 		</div>
 		<div class="col-xs-10">
 			<div class="row">
-			<img src="img/logoblanco.png"/>
+				<img src="img/logoblanco.png"/>
 			</div>
 			<div class="row">
 				<form id="formulario">
 					<p id = 'titulo' >Esta app te ayudara  a hacer mas facil tus pagos de una forma mas rapida.</p></br>
 					<input type="text" class="form-control" id="numero" name="numero" placeholder="Ingrese numero"></br>
-					<input type="button" class="form-control" onclick="showAlert();" value="Ingresar">
+					<button type="submit" id="boton" class="form-control">Ingresar</button>
 				</form>
 				</br>
 				</br>
 				</br>
 			</div>
 		</div>
-	<div class="col-xs-1">
-	</div>
+		<div class="col-xs-1">
+		</div>
 	</div>
 </div>
+
 <script type="text/javascript" src="cordova.js"></script>
-<script>
-$(function(){
+<script src="js/index.js"></script>
 
-    /* Validar el formulario */
-    var formulario = $("#formulario").validate
-         ({
-             rules: /* Accedemos a los campos.*/
-             {
-               numero: {required: true, digits: true, minlength: 5, maxlength: 15}
-             },
-             messages: /* Accedemos a los campos.*/
-             {
-				numero: {required: 'El campo es requerido', digits: 'Ingrese numeros correctos', minlength: 'El mínimo permitido son 5 caracteres', maxlength: 'El máximo permitido son 15 caracteres'}
-             },
-			highlight: function(element){
-			},
-			unhighlight: function(element){
-			}
-         });
-});
-
-document.addEventListener("deviceready", onDeviceReady, false);
-
-    // device APIs are available
-    //
-    function onDeviceReady() {
-        // Empty
-    }
-
-    // alert dialog dismissed
-        function alertDismissed() {
-            window.location.href = "Paginas/menuIndex.html";
-        }
-
-    // Show a custom alertDismissed
-    //
-    function showAlert() {
-        navigator.notification.alert(
-            'Registro',  // message
-            alertDismissed,         // callback
-            'Registro',            // title
-            'Registrar'                  // buttonName
-        );
-    }
-</script>
 </body>
 </html>
