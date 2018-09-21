@@ -8,65 +8,15 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!--Plugin de Validacion -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
   <!-- touchSwipe library -->
 	<script src="http://labs.rampinteractive.co.uk/touchSwipe/jquery.touchSwipe.min.js"></script>
 	<!-- Sliding swipe menu javascript file -->
 	<script src="../js/menuDesplegable/jquery.slideandswipe.js"></script>
 	<link rel="stylesheet" href="../css/styleMenu.css" type="text/css" media="all">
-<style>
-	
-	#div{
-	    width: 100%;
-	    font-size: 5px; font-weight:bold; text-align:center;
-	    padding-top: 5px; word-wrap:break-word;
-	}
+	<link rel="stylesheet" type="text/css" href="../css/styleRcgBanco.css" media="all">
 
-	.form-control {
-		height: 60px;
-		border-radius: 10px;
-		border: 2px solid #ccc;
-		margin: 2px ;
-		font-size: 30px;
-		color: #77C32A;
-		font-family: 'Roboto Regular' 30px;
-		font-weight: 600;
-		text-align: center;
-	}
-
-    .iconos {
-		font-size: 70px;
-		padding: 25px;
-		margin: 60px;
-		background :  #EDEDED;
-		border-radius: 50%;
-		left: 20px;
-		position: relative;
-    }
-
-    .plas {
-		color:  #77C32A;
-		font-size: 30px;
-		position: relative;
-		top: -15px;
-		left: -60px;
-		background: #fff;
-		border-radius: 50%; 
-    }
-
-    h3 {
-		font-family: 'Roboto Regular' 22px;
-    }
-
-	input[type=button] {
-		margin: auto;
-		font-size: 20px;
-		color: white;
-		background-color: #3690E6;
-		border-radius: 30px;
-		border: 8px;  
-	}
-
-</style>
 </head>
 
 <body>
@@ -146,11 +96,13 @@
             	</div>                
 				</div>
           	  	<h3>Monto</h3>
-        		<input  class="form-control"  type="text" placeholder="$ 0.00">
-        		<br>
-        		<br>
-        		<br>
-				<input type="button" class="form-control" id="btnRegistro"value="Recargar">
+          	  	<form id="formulario">
+          	  		<input id="monto" name="monto" class="form-control"  type="text" placeholder="$ 0.00">
+	        		<br>
+	        		<br>
+	        		<br>
+					<button type="submit" class="form-control" id="btnRecarga" >Recargar</button>
+          	  	</form>  		
 			</div>
 			<div class="col-xs-1">
 			</div>
@@ -161,5 +113,6 @@
 	</div> 
 </div>
 <script src="../js/menuLateral.js"></script>
+<script  src="../js/rcgBanco.js"></script>
 </body>
-</html>
+</html >

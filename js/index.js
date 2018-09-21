@@ -23,24 +23,24 @@ $(document).ready(function(){
 			/*Validacion correcta metodo.*/
 			submitHandler: function(form){
 				
-				window.location.href = "Paginas/index.html";
+				//window.location.href = "Paginas/index.html";
 				
-				/*Cargar librerias de Cordova.
+				//Cargar librerias de Cordova.
 				document.addEventListener("deviceready", onDeviceReady, false);
-				Funcion ready. 
+				//Funcion ready. 
 				function onDeviceReady() {
 				}
-				Funcion alerta.
+				//Funcion alerta.
 				function alertDismissed() {
 				window.location.href = "Paginas/menuIndex.html";
 				}	
-				Alerta en cordova.
+				//Alerta en cordova.
 				navigator.notification.alert(
 					'No tienes cuenta.',  // message
 					alertDismissed,         // callback
 					'PractiCash',            // title
 					'Registrar'                 // buttonName
-				);*/
+				);
 			}	
 		});	
 	});

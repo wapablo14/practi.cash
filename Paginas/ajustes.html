@@ -11,68 +11,11 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+  <!--Plugin de Validacion -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
 
- <style>
- 	#div{
-	    width: 100%;
-	    font-size: 5px; font-weight:bold; text-align:center;
-	    padding-top: 5px; word-wrap:break-word;
-	}
+  <link rel="stylesheet" type="text/css" href="../css/styleAjustes.css" media="all">
 
-  .cajas {
-    background-color: #3690E6;
-    width: 100%;
-    height: 50px;
-  }
-
-	 .form-control {
-    height: 50px;
-    border-radius: 10px;
-    border: 2px solid #ccc;
-    margin: 2px ;
-	}
-
-    .icono {
-    font-size: 50px;
-    padding: 25px;
-    margin: 40px;
-    background :  #EDEDED;
-    border-radius: 50%;
-    
-    }
-
-    .plas {
-      color:  #77C32A;
-      font-size: 30px;
-      position: relative;
-      top: -10px;
-      left: -60px;
-      background: #fff;
-      border-radius: 50%; 
-    }
-
-   strong {
-     font-family:'Roboto-Regular' ;
-     font-size: 15px;
-     height: 50px;
-     color: #333333;
-   }
-
-  h4 {
-  text-align: left;
-	}
-
- input[type=button] {
-  
-    margin: auto;
-    font-size: 20px;
-    color: white;
-    background-color: #3690E6;
-    border-radius: 30px;
-    border: 8px;  
-}
-
-</style>
 </head>
 
 <body>
@@ -83,12 +26,9 @@
     <div class="caja">
       <div id="div" style="background: linear-gradient( 90deg, #77C32A, #3690E6,  #54358B); "></div>
     </div> 
-    <div class="cajas">
-      	
-    </div>
      
     <div class="col-md-3"></div>
-      <div class="col-md-7" id="inputs">
+      <div class="col-md-6" id="inputs">
        <div class="row">
           <div class="col-xs-1">
           </div>
@@ -98,26 +38,37 @@
             <i class=" icono fas fa-user" style="color: #C1C1C1;"></i> 
             <i class=" plas fas fa-plus-circle"></i> 
             </div>                
-            
           </div>
-        <input  class="form-control"  type="text" placeholder="Nombre">
-        <br>
-        <input class="form-control"  type="text" placeholder="Apellido">
-        <br>
-        <input class="form-control"  type="password" placeholder="Contraseña">
-        <br>
-        <input class="form-control" type="password" placeholder="Confirmar Contraseña">
-          <br>
-		     
-		<input type="button" class="form-control" id="btnRegistro"value="Actualizar">
-			</div>
+            <form id="formulario">   
+              <input  id="nombre" class="form-control" name="nombre" type="text" placeholder="Nombre">
+              <br>
+              <input id="apellido" class="form-control" name="apellido"  type="text" placeholder="Apellido">
+              <br>
+               <div id="wrapper">
+                <div class="form-group has-feedback">
+                  <input type="password" class="form-control" id="password" placeholder="Contraseña">
+                  <i class="glyphicon glyphicon-eye-open form-control-feedback"></i>
+                </div>
+              </div>
+              <br>
+              <input id="contra_n_usuario" class="form-control" type="password" placeholder="Confirmar Contraseña">
+              <br>
+              <label id="mensaje_error" class="control-label col-md-12 text-success" ></label>
+              <br> 
+      		    <button type="submit" class="form-control" id="btnActualizar" >Actualizar</button> 
+			      </form>
+         </div>
 				<div class="col-xs-1">
 		   </div>
 			</div>		
 		</div>
-    <div class="col-md-2"></div>
+    <div class="col-md-3"></div>
 	</div> 
 </div>
+<script src="../js/ajustes.js"></script>
+<script src="../js/contraseña.js"></script>
+<script src="../js/contra.js"></script>
+<script src="../js/hideShowPassword.min.js"></script>
 
 </body>
 </html>

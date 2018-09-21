@@ -1,0 +1,75 @@
+/*Line de color*/
+	#div{
+		width: 100%;
+		font-size: 5px; font-weight:bold; text-align:center;
+		padding-top: 5px; word-wrap:break-word;
+	}
+	h4{
+		font-family: 'roboto-regular';
+		width: 50%;
+		text-align: 100px;
+	}
+	#img {
+		background-color:  #EDEDED;
+		width: 125%;
+		height: 65%;
+		border: 1px;
+		border-radius: 12px;	
+	}
+
+	#imgs {
+		
+		width: 125%;
+		height: 65%;
+		border: 1px;
+		border-radius: 12px;	
+	}
+	#imgs{
+		background-color: #3690E6;
+	}
+	#bncs {
+		background: #C7E1F2
+	}
+	.form-control {
+		height: 50px;
+		border-radius: 10px;
+		border: 2px solid #ccc; 
+	}
+  /*Color del icono del calendario*/	
+	.calendario{
+		color: #77C32A;
+	}
+	.inner-addon {
+		position: relative;
+	}
+	.inner-addon .calendario {
+		position: absolute;
+		padding: 20px;
+		pointer-events: none;
+	}
+	.right-addon .calendario {
+		right: 0px;
+	}
+	.right-addon input {
+		padding-right: 50px;
+	}
+	 button[type=submit] {
+  
+    margin: auto;
+    font-size: 20px;
+    color: white;
+    background-color: #3690E6;
+    border-radius: 30px;
+    border: 8px;  
+	}
+
+	 #tarjeta-error {
+    color: red;
+    left: 400px;
+  }
+    
+
+   #cvv-error {
+    color: red;
+    left: 400px;
+  }

@@ -11,68 +11,13 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
 	<!-- touchSwipe library -->
 	<script src="http://labs.rampinteractive.co.uk/touchSwipe/jquery.touchSwipe.min.js"></script>
 	<!-- Sliding swipe menu javascript file -->
 	<script src="../js/menuDesplegable/jquery.slideandswipe.js"></script>
 	<link rel="stylesheet" href="../css/styleMenu.css" type="text/css" media="all">
-<style >
-
-	#div{
-		width: 100%;
-		font-size: 5px; font-weight:bold; text-align:center;
-		padding-top: 5px; word-wrap:break-word;
-	}
-	h4{
-		font-family: 'roboto-regular';
-		width: 50%;
-		text-align: 100px;
-	}
-	#img {
-		background-color:  #EDEDED;
-		width: 125%;
-		height: 65%;
-		border: 1px;
-		border-radius: 12px;	
-	}
-	#trja{
-		background-color: #3690E6;
-	}
-	#bncs {
-		background: #C7E1F2
-	}
-	.form-control {
-		height: 50px;
-		border-radius: 10px;
-		border: 2px solid #ccc; 
-	}
-	.calendario{
-		color: #77C32A;
-	}
-	.inner-addon {
-		position: relative;
-	}
-	.inner-addon .calendario {
-		position: absolute;
-		padding: 20px;
-		pointer-events: none;
-	}
-	.right-addon .calendario {
-		right: 0px;
-	}
-	.right-addon input {
-		padding-right: 50px;
-	}
-	input[type=button] {  
-		margin: auto;
-		font-size: 20px;
-		color: white;
-		background-color: #3690E6;
-		border-radius: 30px;
-		border: 8px;  
-	}
-	
-</style>
+	<link rel="stylesheet" type="text/css" href="../css/styleTarjetas.css" media="all">
 </head>
 <body>
 
@@ -145,7 +90,7 @@
 			<h2>Tipo Tarjeta</h2><br>
 			<div class="row text-center">
 				<div class="col-xs-2">
-					<img id="img" src="../img/creditcard-a.png" >
+					<img id="imgs" class="trja" src="../img/creditcard-a.png" >
 			    </div> 
 			    <div class="col-xs-2">
 					<img id="img" src="../img/creditcard-b.png">
@@ -175,22 +120,24 @@
 						<option value="BncPacifico" > Banco del Pacifico</option>	
 					</select>
 					<br>
-					<input class="form-control" type="text" placeholder="# Tarjeta">
-					<br>
-					<form>
-      				<div class="form-group">   
+					<form id="formulario" >
+						<input class="form-control" type="text" id="tarjeta" name="tarjeta" placeholder="# Tarjeta">
+						<br>
+						<form>
+						<div class="form-group">   
 						<div class="inner-addon right-addon input-append date ">
 						<i class=" calendario fas fa-calendar-alt"></i>
 						<input size="16" type="text" id="date" name="date" class="form-control" placeholder="Fecha Caducidad" />
 						<span class="add-on"><i class="icon-th"></i></span>
 						</div>
 						<br>
-						<input class="form-control" type="text" placeholder="CV">
+						<input class="form-control" type="text"  id="cvv" name="cvv" placeholder="CVV">
 						<br>
-						<input type="button" class="form-control" id="btnRegistro"value="Registrar">
-					</div>
-					</form>
-						<div class="col-md-3"></div>
+						<button type="submit" class="form-control" id="btnRegistrar">Registrar</button> 
+						</div>
+						</form>
+					</form>			
+				<div class="col-md-3"></div>
 				</div>
 				<div class="col-md-3">
 				</div>
@@ -203,22 +150,10 @@
 </div>
 <script type="text/javascript" src="cordova.js"></script>
 <script src="../js/menuLateral.js"></script>
+<script src="../js/calendarioTarjetas.js"></script>
+<script src="../js/tarjetas.js"></script>
 <script>
-	$(document).ready(function(){
-		var date_input=$('input[name="date"]'); //our date input has the name "date"
-		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-		var options={
-			format: 'mm/dd/yyyy',
-	        container: container,
-	        todayHighlight: true,
-	        autoclose: true,
-		};
-		date_input.datepicker(options);
-	    })
-		
-		$('#btnRegistro').click(function(){
-			window.location.href = "usuario.html";
-		});
+	
 </script>
 </body>	
 </html>
