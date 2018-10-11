@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>plantilla para phonegap</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!-- touchSwipe library -->
+	<script src="http://labs.rampinteractive.co.uk/touchSwipe/jquery.touchSwipe.min.js"></script>
+	<!-- Sliding swipe menu javascript file -->
+	<script src="../js/menuDesplegable/jquery.slideandswipe.js"></script>
+	<link rel="stylesheet" href="../css/styleMenu.css" type="text/css" media="all">
+	
+<style>
+	#div{
+	    width: 100%;
+	    font-size: 5px; font-weight:bold; text-align:center;
+	    padding-top: 5px; word-wrap:break-word;
+	}
+
+  #img {
+    
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+
+  }
+
+  #imgs {
+    
+   position: relative;
+   top: 50px;
+   left: 50%;
+   margin-top: -75px;
+   margin-left: -73px;
+  }
+
+  #saludo {
+    background-color: #ffffff;
+    font-size: 22px;
+    font-family: 'Roboto Light';
+    color: #3690E6;
+   
+    
+    text-align: center;
+  }
+
+  #monto {
+    background-color: #77C32A;
+    font-size: 22px;
+    font-family: 'Roboto Light';
+    color: #ffffff;
+    height: 200px;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  #hola{
+    margin-top: 40px;
+  }
+
+  #actual {
+    margin-top: 70px;
+  }
+
+  .tabla h4 {
+    text-align: center;
+    position: absolute;
+    left: 20px;
+  }
+
+  #pagos {
+    color: #54358B;
+    font-weight: 600;
+  }
+
+  #recargas {
+    color: #77C32A;
+    font-weight: 600;
+  }
+
+  #transacciones {
+    color: #3690E6;
+    font-weight: 600;
+  }
+
+ @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+
+</style>
+</head>
+<body>
+
+<div class="caja">
+	<div id="div" style="background: linear-gradient( 90deg, #77C32A, #1F73B4,  #54358B); "></div>
+</div>  
+<div class="container-fluid">
+	<div class="row">
+		<div class="topnav">
+		<!-- Centered link -->
+		<div class="topnav-centered">
+			<a href="#home" class="active">Inicio</a>
+		</div> 
+		
+		<!-- Left-aligned links (default) -->
+  
+		<!-- Right-aligned links -->
+		<div class="topnav-right">
+			<main>
+				<a href="#" id="menu" class="ssm-toggle-nav" title="open nav"><i class="fas fa-bars"></i></a>
+			</main>
+		</div>
+		</div>
+	</div>
+	
+<nav class="nav">
+	<div id="mySidenav" class="contenedor-menu" data-status="disabled">
+		<div class="row menu-lateral">
+			<div class="col-xs-6">
+				<a>Nombre Usuario </a>
+			</div>
+			<div class="col-xs-6">
+				<img src="../img/fotoUsuario.png">
+			</div>
+		</div>
+		<div class="row">
+			<ul class="nav menu" role="tablist">
+				<li><a href="#">Recargas<i class="icono derecha fa fa-chevron-down"></i></a>
+					<ul class="nav menu" role="tablist">
+						<li><a href="rcgtarjeta.html">Tarjeta<i class="icono derecha fas fa-angle-right"></i></a></li>
+						<li><a href="rcgbanco.html">Cuenta banco<i class="icono derecha fas fa-angle-right"></i></a></li>
+					</ul>
+				</li>
+				<li><a href="#">Cerrar Sesion<i class="icono derecha fas fa-angle-right"></i></a></li>
+				<li><a href="ajustes.html">Perfil<i class="icono derecha fas fa-angle-right"></i></a></li>
+				<li><a href="#" id="botonMapa">Buscar<i class="icono derecha fas fa-angle-right"></i></a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<div class="row-content">
+	<div class="ssm-overlay ssm-toggle-nav"></div>
+</div>
+
+<div id="saludo" class="row">
+	<label id="hola">Hola, Nombre Apellido</label>
+</div>
+
+<div class="row">
+	<a id="imgs"><img id="img"src="../img/fotodeusuario.jpg"></a>
+		<div class="container-fluid" id="monto" >
+			<label id="actual">Saldo Actual</label>
+			<h1 >$0.00</h1>      
+			<br>
+		</div>
+</div>
+
+<div id="tabla" class="row">
+	<div class="tabla">
+		<h4>Ultimos Movimientos</h4>
+		<br>
+		<br>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Fecha</th>
+					<th>Movimiento</th>
+					<th>Saldo</th>
+				</tr>
+            </thead>
+            <tbody>
+				<tr>
+					<td>10/09/2018</td>
+					<td style="font-weight: 600">Pago</td>
+					<td id="pagos">$100</td>
+				</tr>
+				<tr>
+					<td>10/09/2018</td>
+					<td style="font-weight: 600">Recarga</td>
+					<td id="recargas">$200</td>
+				</tr>
+				<tr>
+					<td>10/09/2018</td>
+					<td style="font-weight: 600">Transaccion</td>
+					<td id="transacciones">$100</td>
+				</tr>
+            </tbody>
+		</table>
+	</div> 
+</div>
+</div>
+<script src="../js/menuLateral.js"></script>
+<script type="text/javascript" src="../cordova.js"></script>}
+<script>
+$(document).ready(function(){
+
+    $("#botonMapa").on("click",function(){
+	
+	//Cargar librerias de Cordova.
+				document.addEventListener("deviceready", onDeviceReady, false);
+				//Funcion ready. 
+				function onDeviceReady() {
+				}
+				//Funcion alerta.
+				function alertDismissed() {
+				window.open('https://paulina96madrid.000webhostapp.com/usuario.php', '_self','location=no');
+				}	
+				//Alerta en cordova.
+				navigator.notification.alert(
+					'No tienes cuenta.',  // message
+					alertDismissed,         // callback
+					'PractiCash',            // title
+					'Registrar'                 // buttonName
+				);
+			
+	});
+});
+</script>
+</body>
+</html>

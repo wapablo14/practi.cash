@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>plantilla para phonegap</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<link href="http://allfont.es/allfont.css?fonts=roboto-regular" rel="stylesheet" type="text/css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+	<!-- touchSwipe library -->
+	<script src="http://labs.rampinteractive.co.uk/touchSwipe/jquery.touchSwipe.min.js"></script>
+	<!-- Sliding swipe menu javascript file -->
+	<script src="../js/menuDesplegable/jquery.slideandswipe.js"></script>
+	<link rel="stylesheet" href="../css/styleMenu.css" type="text/css" media="all">
+
+ <style>
+ 	#div{
+	    width: 100%;
+	    font-size: 5px; font-weight:bold; text-align:center;
+	    padding-top: 5px; word-wrap:break-word;
+	}
+
+	.form-control {
+		height: 50px;
+		border-radius: 10px;
+		border: 2px solid #ccc;
+		margin: 2px ;
+	}
+
+    #icono {
+		font-size: 50px;
+		padding: 25px;
+		margin: 40px;
+		background :  #EDEDED;
+		border-radius: 50%; 
+    }
+
+    .plas {
+		color:  #77C32A;
+		font-size: 30px;
+		position: relative;
+		top: -10px;
+		left: -60px;
+		background: #fff;
+		border-radius: 50%; 
+    }
+
+	strong {
+		font-family:'Roboto-Regular' ;
+		font-size: 15px;
+		height: 50px;
+		color: #333333;
+	}
+
+	h4 {
+		text-align: left;
+	}
+
+	input[type=button] {
+		margin: auto;
+		font-size: 20px;
+		color: white;
+		background-color: #3690E6;
+		border-radius: 30px;
+		border: 8px;  
+	}
+
+</style>
+</head>
+
+<body>
+ <div class="caja">
+      <div id="div" style="background: linear-gradient( 90deg, #77C32A, #3690E6,  #54358B); "></div>
+    </div> 
+<div class="container-fluid text-center" >
+	<div class="row content">
+		<div class="topnav">
+		<!-- Centered link -->
+		<div class="topnav-centered">
+			<a href="#home" class="active">Recarga - Tarjeta</a>
+		</div> 
+		
+		<!-- Left-aligned links (default) -->
+			<a id="botonMenu" href="#home" class="active"><i class="fas fa-chevron-circle-left"></i></a>
+		
+		<!-- Right-aligned links -->
+		<div class="topnav-right">
+			<main>
+				<a href="#" id="menu" class="ssm-toggle-nav" title="open nav"><i class="fas fa-bars"></i></a>
+			</main>
+		</div>
+		</div>
+	<nav class="nav">
+		<div id="mySidenav" class="contenedor-menu" data-status="disabled">
+		<div class="row menu-lateral">
+			<div class="col-xs-6">
+				<a>Nombre Usuario </a>
+			</div>
+			<div class="col-xs-6">
+				<img src="../img/fotoUsuario.png">
+			</div>
+		</div>
+		<div class="row">
+			<ul class="nav menu" role="tablist">
+				<li><a href="movimientos.html"><i class="icono izquierda fas fa-book"></i>Historial<i class="icono derecha fas fa-angle-right"></i></a></li>
+				<li><a href="#"><i class="icono izquierda fas fa-credit-card"></i>Cartera<i class="icono derecha fa fa-chevron-down"></i></a>
+					<ul class="nav menu" role="tablist">
+						<li><a>Tarjeta 1<i class="icono derecha fas fa-angle-right"></i></a></li>
+						<li><a>Tarjeta 2<i class="icono derecha fas fa-angle-right"></i></a></li>
+						<li><a href="tarjetas.html">Añadir tarjeta<i class="icono derecha fas fa-angle-right"></i></a></li>
+					</ul>
+				</li>
+				<li><a href="#"><i class="icono izquierda fas fa-dollar-sign"></i>Recargas<i class="icono derecha fa fa-chevron-down"></i></a>
+					<ul class="nav menu" role="tablist">
+						<li><a href="rcgtarjeta.html">Tarjeta<i class="icono derecha fas fa-angle-right"></i></a></li>
+						<li><a href="rcgbanco.html">Cuenta banco<i class="icono derecha fas fa-angle-right"></i></a></li>
+					</ul>
+				</li>
+				<li><a href="transferencia.html"><i class="icono izquierda fas fa-exchange-alt"></i>Transacciones<i class="icono derecha fas fa-angle-right"></i></a></li>
+				<li><a href="#">Cerrar Sesion<i class="icono derecha fas fa-angle-right"></i></a></li>
+				<li><a href="ajustes.html">Ajustes<i class="icono derecha fas fa-angle-right"></i></a></li>
+			</ul>
+		</div>
+		</div>
+	</nav>
+
+	<div class="row-content">
+		<div class="ssm-overlay ssm-toggle-nav"></div>
+	</div>
+    <div class="cajas"> 	
+    </div>
+     
+    <div class="col-md-3"></div>
+      <div class="col-md-6" id="inputs">
+       <div class="row">
+          <div class="col-xs-1">
+          </div>
+          <div class="col-xs-10" >
+          <div class="row">
+            <div  >
+            <i class=" icono fas fa-user" id="icono"style="color: #C1C1C1;"></i> 
+            <i class=" plas fas fa-plus-circle"></i> 
+            </div>                
+            
+          </div>
+        <input  class="form-control"  type="text" placeholder="Nombre">
+        <br>
+        <input class="form-control"  type="text" placeholder="Apellido">
+        <br>
+        <input class="form-control"  type="password" placeholder="Contraseña">
+        <br>
+        <input class="form-control" type="password" placeholder="Confirmar Contraseña">
+          <br>
+		     
+		<input type="button" class="form-control" id="btnRegistro"value="Actualizar">
+			</div>
+				<div class="col-xs-1">
+		   </div>
+			</div>		
+		</div>
+    <div class="col-md-3"></div>
+	</div> 
+</div>
+<script src="../js/menuLateral.js"></script>
+</body>
+</html>

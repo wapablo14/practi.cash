@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>plantilla para phonegap</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<link href="http://allfont.es/allfont.css?fonts=roboto-regular" rel="stylesheet" type="text/css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+	<!-- touchSwipe library -->
+	<script src="http://labs.rampinteractive.co.uk/touchSwipe/jquery.touchSwipe.min.js"></script>
+	<!-- Sliding swipe menu javascript file -->
+	<script src="../js/menuDesplegable/jquery.slideandswipe.js"></script>
+	<link rel="stylesheet" href="../css/styleMenu.css" type="text/css" media="all">
+<style >
+
+	#div{
+		width: 100%;
+		font-size: 5px; font-weight:bold; text-align:center;
+		padding-top: 5px; word-wrap:break-word;
+	}
+	h4{
+		font-family: 'roboto-regular';
+		width: 50%;
+		text-align: 100px;
+	}
+	#img {
+		background-color:  #EDEDED;
+		width: 125%;
+		height: 65%;
+		border: 1px;
+		border-radius: 12px;	
+	}
+	#trja{
+		background-color: #3690E6;
+	}
+	#bncs {
+		background: #C7E1F2
+	}
+	.form-control {
+		height: 50px;
+		border-radius: 10px;
+		border: 2px solid #ccc; 
+	}
+	.calendario{
+		color: #77C32A;
+	}
+	.inner-addon {
+		position: relative;
+	}
+	.inner-addon .calendario {
+		position: absolute;
+		padding: 20px;
+		pointer-events: none;
+	}
+	.right-addon .calendario {
+		right: 0px;
+	}
+	.right-addon input {
+		padding-right: 50px;
+	}
+	input[type=button] {  
+		margin: auto;
+		font-size: 20px;
+		color: white;
+		background-color: #3690E6;
+		border-radius: 30px;
+		border: 8px;  
+	}
+	
+</style>
+</head>
+<body>
+
+<div class="caja">
+	<div id="div" style="background: linear-gradient( 90deg, #77C32A, #1F73B4,  #54358B); "></div>
+</div>  
+
+<!--  Tarjetas -->    
+<div class="container-fluid" >
+	<div class="row">
+		<div class="topnav">
+		<!-- Centered link -->
+		<div class="topnav-centered">
+			<a href="#home" class="active">Registrar tarjeta</a>
+		</div> 
+		
+		<!-- Left-aligned links (default) -->
+			<a id="botonMenu" href="#home" class="active"><i class="fas fa-chevron-circle-left"></i></a>
+		
+		<!-- Right-aligned links -->
+		<div class="topnav-right">
+			<main>
+				<a href="#" id="menu" class="ssm-toggle-nav" title="open nav"><i class="fas fa-bars"></i></a>
+			</main>
+		</div>
+		</div>
+	</div>
+	
+	<nav class="nav">
+	<div id="mySidenav" class="contenedor-menu" data-status="disabled">
+		<div class="row menu-lateral">
+			<div class="col-xs-6">
+				<a>Nombre Usuario </a>
+			</div>
+			<div class="col-xs-6">
+				<img src="../img/fotoUsuario.png">
+			</div>
+		</div>
+		<div class="row">
+			<ul class="nav menu" role="tablist">
+				<li><a href="movimientos.html"><i class="icono izquierda fas fa-book"></i>Historial<i class="icono derecha fas fa-angle-right"></i></a></li>
+				<li><a href="#"><i class="icono izquierda fas fa-credit-card"></i>Cartera<i class="icono derecha fa fa-chevron-down"></i></a>
+					<ul class="nav menu" role="tablist">
+						<li><a>Tarjeta 1<i class="icono derecha fas fa-angle-right"></i></a></li>
+						<li><a>Tarjeta 2<i class="icono derecha fas fa-angle-right"></i></a></li>
+						<li><a href="tarjetas.html">Añadir tarjeta<i class="icono derecha fas fa-angle-right"></i></a></li>
+					</ul>
+				</li>
+				<li><a href="#"><i class="icono izquierda fas fa-dollar-sign"></i>Recargas<i class="icono derecha fa fa-chevron-down"></i></a>
+					<ul class="nav menu" role="tablist">
+						<li><a href="rcgtarjeta.html">Tarjeta<i class="icono derecha fas fa-angle-right"></i></a></li>
+						<li><a href="rcgbanco.html">Cuenta banco<i class="icono derecha fas fa-angle-right"></i></a></li>
+					</ul>
+				</li>
+				<li><a href="transferencia.html"><i class="icono izquierda fas fa-exchange-alt"></i>Transacciones<i class="icono derecha fas fa-angle-right"></i></a></li>
+				<li><a href="#">Cerrar Sesion<i class="icono derecha fas fa-angle-right"></i></a></li>
+				<li><a href="ajustes.html">Ajustes<i class="icono derecha fas fa-angle-right"></i></a></li>
+			</ul>
+		</div>
+	</div>
+	</nav>
+
+	<div class="row-content">
+		<div class="ssm-overlay ssm-toggle-nav"></div>
+	</div>
+	
+	<div class="row">	
+		<div class="col-md-3" >
+		</div>	
+		<div class="col-md-6">
+		<div class="container-fluid">
+			<h2>Tipo Tarjeta</h2><br>
+			<div class="row text-center">
+				<div class="col-xs-2">
+					<img id="img" src="../img/creditcard-a.png" >
+			    </div> 
+			    <div class="col-xs-2">
+					<img id="img" src="../img/creditcard-b.png">
+			    </div>
+			    <div class="col-xs-2">
+					<img id="img" src="../img/creditcard-c.png" >
+			    </div>
+			    <div class="col-xs-2">
+					<img id="img" src="../img/creditcard-d.png" >
+			    </div>
+			    <div class="col-xs-2">
+					<img id="img" src="../img/creditcard-e.png">
+			    </div>
+			    <div class="col-xs-2">
+				</div>
+			</div>
+		</div>
+		<br>
+		<div class=" container-fluid" >
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+					<select  id="bncs" class="form-control">	
+						<option value="BncPichincha" > Banco del Pichincha</option>
+						<option value="BncProdubanco" > Banco Produbanco</option>
+						<option value="BncGuayaquil" > Banco de Guayaquil</option>
+						<option value="BncPacifico" > Banco del Pacifico</option>	
+					</select>
+					<br>
+					<input class="form-control" type="text" placeholder="# Tarjeta">
+					<br>
+					<form>
+      				<div class="form-group">   
+						<div class="inner-addon right-addon input-append date ">
+						<i class=" calendario fas fa-calendar-alt"></i>
+						<input size="16" type="text" id="date" name="date" class="form-control" placeholder="Fecha Caducidad" />
+						<span class="add-on"><i class="icon-th"></i></span>
+						</div>
+						<br>
+						<input class="form-control" type="text" placeholder="CV">
+						<br>
+						<input type="button" class="form-control" id="btnRegistro" value="Registrar">
+					</div>
+					</form>
+						<div class="col-md-3"></div>
+				</div>
+				<div class="col-md-3">
+				</div>
+			</div>	
+		</div>
+		</div>
+		<div class="col-md-3">
+		</div>	
+	</div> 
+</div>
+
+<script src="../js/menuLateral.js"></script>
+<script>
+	$(document).ready(function(){
+		var date_input=$('input[name="date"]'); //our date input has the name "date"
+		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+		var options={
+			format: 'mm/dd/yyyy',
+	        container: container,
+	        todayHighlight: true,
+	        autoclose: true,
+		};
+		date_input.datepicker(options);
+
+		$('#btnRegistro').click(function(){
+			alert("Recarga exitosa");
+			window.location.href = "usuario.html";
+		});
+});
+	
+</script>
+</body>	
+</html>

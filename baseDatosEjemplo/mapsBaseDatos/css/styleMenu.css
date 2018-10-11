@@ -1,0 +1,171 @@
+ .topnav {
+		  position: relative;
+		  overflow: hidden;
+		  background-color: #3690E6;
+		}
+
+		.topnav a {
+		  float: left;
+		  color: #f2f2f2;
+		  text-align: center;
+		  padding: 14px 16px;
+		  text-decoration: none;
+		  font-size: 17px;
+		}
+
+		.topnav a:hover {
+		  background-color: #3690E6;
+		  color: black;
+		}
+
+		.topnav a.active {
+		  color: white;
+		}
+
+		.topnav-centered a {
+		  float: none;
+		  position: absolute;
+		  top: 50%;
+		  left: 50%;
+		  transform: translate(-50%, -50%);
+		}
+
+		.topnav-right {
+		  float: right;
+		}
+/**
+ * Sliding swipe menu CSS
+ */
+nav {
+    height: 100%;
+    width: 250px;
+    background-color:  #3690E6;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    position: fixed;
+    overflow-y: auto;
+    overflow-x: visible;
+    transform: translate(-250px,0);
+}
+.ssm-overlay {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0,0,0,0.2);
+    display: none;
+    z-index: 1;
+}
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+/*ul * {
+    margin: 0;
+    padding: 0;
+}*/
+
+html,
+body {
+    height: 100%;
+}
+
+/*body {
+    background-color: #f1f1f1;
+    font-family: 'Open Sans';
+    margin: 0;
+    text-align: center;
+}*/
+.is-navOpen{
+  overflow: hidden;
+}
+
+a {
+    color: red;
+	font-size: 17px;
+}
+
+h1 {
+    font-weight: normal;
+    font-size: 50px;
+}
+.nav .menu {
+	width: 100%;
+	list-style: none;
+	padding: 0px 25px;
+}
+.nav ul {
+    background-color: #3690E6;
+	list-style: none;
+}
+.contenedor-menu .menu li a {
+	padding: 15px 5px;
+	border-bottom-style: solid;
+	border-color:  #C7E1F2;
+	border-width: 1px;
+	color: white;
+	background: #3690E6;
+	text-align: left;
+}
+.contenedor-menu .menu li a:hover {
+	background: #3690E6;
+	color:#fff;
+}
+.contenedor-menu .menu .icono {
+	font-size: 15px;
+	line-height: 30px;
+}
+.contenedor-menu .menu .icono.izquierda {
+	margin-right: 5px; 
+	float: left;
+}
+
+.contenedor-menu .menu .icono.derecha {
+	float: right;
+	
+}
+.contenedor-menu .menu ul {
+	display: none;
+	padding: 10px 0px;
+    background-color: #3690E6;
+	list-style: none;
+}
+.contenedor-menu .menu ul li a {
+	
+	border-bottom-style: solid;
+	border-color: #3690E6;
+	border-width: 1px;
+	background: #C7E1F2;
+	color: white;
+	padding: 15px 10px;
+}
+.contenedor-menu .menu .activado > a {
+	background: #1a95d5;
+	color:#fff;
+}
+.menu-lateral {
+	background-color: #1F73B4;
+	height: 52px;
+}
+.menu-lateral a{
+	position: relative;
+	left: 15px;
+	top: 15px;
+	color: white;
+	font-size: 15px;
+}
+img {
+	width: 43px;
+	height: 43px;
+	border-radius: 30px;
+	position: relative;
+	top: 5px;
+}
+		/* On small screens, set height to 'auto' for the grid */
+		@media screen and (max-width: 330px) {
+
+		  .row.content {height: auto;} 
+		}	

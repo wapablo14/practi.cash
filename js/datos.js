@@ -56,4 +56,5 @@
 					'PractiCash',            // title
 					'Registrar'                 // buttonName
 				);*/
+	
 	});
