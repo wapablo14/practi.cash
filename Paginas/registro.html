@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>plantilla para phonegap</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <!-- Plugin de validacion -->
+   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
+  <link rel="stylesheet" type="text/css" href="../css/styleRegistro.css" media="all">
+
+</head>  
+<body>
+<div  class="container-fluid text-center" >
+  <div class="row content">
+    <div class="caja">
+      <div id="div" style="background: linear-gradient( 90deg, #77C32A, #3690E6,  #54358B); "></div>
+    </div>  
+      
+    <div class="col-md-3"></div>
+      <div class="col-md-6" id="inputs">
+       <div class="row">
+          <div class="col-xs-1">
+          </div>
+          <div class="col-xs-10" >
+          <div class="row">
+            <div>
+             <i class=" icono far fa-user-circle "> <strong >Registro</strong> </i>
+            </div>                
+          </div>
+            <form id="formulario">
+                <input id="numero" class="form-control" name="numero" type="text" onpaste="return false" placeholder="Numero" readonly=true>
+                <br>
+                <input id="name"  class="form-control" name="nombre" type="text"  onpaste="return false" placeholder="Nombre">
+                <br>
+                <input id="fullname" class="form-control" name="apellido" type="text"  onpaste="return false" placeholder="Apellido">
+                <br>
+                <div id="wrapper">
+                  <div class="form-group has-feedback">
+                    <input type="password" class="form-control" id="password" placeholder="Contraseña">
+                    <i class="glyphicon glyphicon-eye-open form-control-feedback"></i>
+                  </div>
+                </div>
+                <br>
+                <input id="contra_n_usuario" class="form-control" type="password" placeholder="Confirmar Contraseña">
+                <br>
+        		    <br>
+                  <label id="mensaje_error" class="control-label col-md-12 text-success" ></label>
+                <div class="row">
+                    <div class="col-xs-6" style="height: 40px;">
+                       <p style="color:rgb(147, 147, 147)">Registrar Tarjeta</p>
+                    </div>
+                    <div class="col-xs-6" style="height: 40px;">
+        					    <input type="checkbox" id="switch"/>
+        			        <label id="label" for="switch"></label>     
+                    </div>
+                </div>
+                    <br>    
+        		        <button type="submit" class="form-control" id="btnRegistro">Registrar</button>
+        	</div>
+        	<div class="col-xs-1"></div>
+        </div>
+      </form>
+		</div>
+    <div class="col-md-3"></div>
+	</div> 
+</div>
+<script type="text/javascript" src="../cordova.js"></script>
+<script src="../js/registro.js"></script>
+<script src="../js/contraseña.js"></script>
+<script src="../js/contra.js"></script>
+<script src="../js/hideShowPassword.min.js"></script>
+</body>
+</html>

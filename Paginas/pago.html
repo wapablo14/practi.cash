@@ -8,52 +8,9 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<style>
-	
-	#div{
-	    width: 100%;
-	    font-size: 5px; font-weight:bold; text-align:center;
-	    padding-top: 5px; word-wrap:break-word;
-	}
-
-	  .form-control {
-    height: 50px;
-    border-radius: 10px;
-    border: 2px solid #ccc;
-    margin: 2px ;
-       
-	}
-
-    
-
-  #monto{
-    font-size: 30px;
-    color: #77C32A;
-    font-family: 'Roboto Regular' 30px;
-    font-weight: 600;
-    text-align: center;
-    height: 60px;
-    
-  }   
-
-    h3 {
-    	font-family: 'Roboto Regular' 22px;
-
-    }
-
-
-	 input[type=button] {
-  
-    margin: auto;
-    font-size: 20px;
-    color: white;
-    background-color: #3690E6;
-    border-radius: 30px;
-    border: 20px;
-
-}
-
-</style>
+  <!-- Plugin de Validacion-->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
+  <link rel="stylesheet" type="text/css" href="../css/stylePago.css" media="all">
 </head>
 
 <body>
@@ -64,9 +21,7 @@
     <div class="caja">
       <div id="div" style="background: linear-gradient( 90deg, #77C32A, #3690E6,  #54358B); "></div>
     </div> 
-    <div class="cajas">
-      	
-    </div>
+    
      
     <div class="col-md-3">
     </div>
@@ -78,12 +33,20 @@
             		<input  class="form-control"  type="text" placeholder="Nombre Empresa">
             	   <br>
           	  	<h3>Monto</h3>
-        		<input  id="monto" class="form-control"  type="text" placeholder="$ 0.00">
-        		<br>
-            <input  class="form-control"  type="password" placeholder="Contraseña">
-        		<br>
-        		<br>
-				<input type="button" class="form-control" id="btnRegistro"value="Pagar">
+                <form id="formulario">
+                  <input  id="monto" class=" montos form-control" name="monto"  type="text" placeholder="$ 0.00">
+                  <br>
+                 <div id="wrapper">
+                   <div class="form-group has-feedback">
+                     <input type="password" class="form-control" id="password" placeholder="Password">
+                     <i class="glyphicon glyphicon-eye-open form-control-feedback"></i>
+                 </div>
+                </div>
+                  <br>
+                  <br>
+                  <button type="submit" class="form-control" id="btnPagar">Pagar</button>
+                </form>
+              		
 	      </div>
 				<div class="col-xs-1">
 		  	    </div>
@@ -93,7 +56,9 @@
         </div>
 	</div> 
 </div>
-
+<script src="../js/pago.js"></script>
+<script src="../js/contra.js"></script>
+<script src="../js/hideShowPassword.min.js"></script>
 </body>
 
 </html>

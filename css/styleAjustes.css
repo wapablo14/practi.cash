@@ -1,0 +1,84 @@
+#div{
+	    width: 100%;
+	    font-size: 5px; font-weight:bold; text-align:center;
+	    padding-top: 5px; word-wrap:break-word;
+	} 
+
+	 .form-control {
+    height: 50px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    margin: 2px ;
+	}
+	
+    #icon {
+    font-size: 50px;
+    padding: 25px;
+    margin: 40px;
+    background :  #EDEDED;
+    border-radius: 50%;
+    
+    }
+
+    .plas {
+      color:  #77C32A;
+      font-size: 30px;
+      position: relative;
+      top: -10px;
+      left: -60px;
+      background: #fff;
+      border-radius: 50%; 
+    }
+
+   strong {
+     font-family:'Roboto-Regular' ;
+     font-size: 15px;
+     height: 50px;
+     color: #333333;
+   }
+
+  h4 {
+  text-align: left;
+	}
+
+ button[type=submit] {
+  
+    margin: auto;
+    font-size: 20px;
+    color: white;
+    background-color: #3690E6;
+    border-radius: 30px;
+    border: 8px;  
+}
+  #nombre-error{
+    color: red;
+    left: 200px;
+  }
+
+  #apellido-error{
+    color: red;
+    left: 200px;
+  }
+
+
+  label {
+    margin: 3px;
+  }
+
+    #password + .glyphicon {
+   cursor: pointer;
+   pointer-events: all;
+ }
+
+/* Styles for CodePen Demo Only */
+#wrapper {
+  max-width: 750px;
+ 
+  padding-top: 2vh;
+}
+
+  .glyphicon{
+    position: absolute;
+    top: 10px;
+    
+  }

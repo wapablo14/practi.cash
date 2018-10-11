@@ -1,72 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>plantilla para phonegap</title>
+  <title>Recarga banco</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!--Plugin de Validacion -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
   <!-- touchSwipe library -->
 	<script src="http://labs.rampinteractive.co.uk/touchSwipe/jquery.touchSwipe.min.js"></script>
 	<!-- Sliding swipe menu javascript file -->
 	<script src="../js/menuDesplegable/jquery.slideandswipe.js"></script>
 	<link rel="stylesheet" href="../css/styleMenu.css" type="text/css" media="all">
-<style>
-	
-	#div{
-	    width: 100%;
-	    font-size: 5px; font-weight:bold; text-align:center;
-	    padding-top: 5px; word-wrap:break-word;
-	}
+	<link rel="stylesheet" type="text/css" href="../css/styleRcgBanco.css" media="all">
 
-	.form-control {
-		height: 60px;
-		border-radius: 10px;
-		border: 2px solid #ccc;
-		margin: 2px ;
-		font-size: 30px;
-		color: #77C32A;
-		font-family: 'Roboto Regular' 30px;
-		font-weight: 600;
-		text-align: center;
-	}
-
-    .iconos {
-		font-size: 70px;
-		padding: 25px;
-		margin: 60px;
-		background :  #EDEDED;
-		border-radius: 50%;
-		left: 20px;
-		position: relative;
-    }
-
-    .plas {
-		color:  #77C32A;
-		font-size: 30px;
-		position: relative;
-		top: -15px;
-		left: -60px;
-		background: #fff;
-		border-radius: 50%; 
-    }
-
-    h3 {
-		font-family: 'Roboto Regular' 22px;
-    }
-
-	input[type=button] {
-		margin: auto;
-		font-size: 20px;
-		color: white;
-		background-color: #3690E6;
-		border-radius: 30px;
-		border: 8px;  
-	}
-
-</style>
 </head>
 
 <body>
@@ -80,7 +30,7 @@
 		<div class="topnav">
 		<!-- Centered link -->
 		<div class="topnav-centered">
-			<a href="#home" class="active">Recarga - Banco</a>
+			<a href="#home" class="active">Recarga banco.</a>
 		</div> 
 		
 		<!-- Left-aligned links (default) -->
@@ -94,10 +44,10 @@
 		</div>
 		</div>
 	<nav class="nav">
-		<div id="mySidenav" class="contenedor-menu" data-status="disabled">
+	<div id="mySidenav" class="contenedor-menu" data-status="disabled">
 		<div class="row menu-lateral">
 			<div class="col-xs-6">
-				<a>Nombre Usuario </a>
+				<a id="btnEjemplo"></a>
 			</div>
 			<div class="col-xs-6">
 				<img src="../img/fotoUsuario.png">
@@ -107,10 +57,7 @@
 			<ul class="nav menu" role="tablist">
 				<li><a href="movimientos.html"><i class="icono izquierda fas fa-book"></i>Historial<i class="icono derecha fas fa-angle-right"></i></a></li>
 				<li><a href="#"><i class="icono izquierda fas fa-credit-card"></i>Cartera<i class="icono derecha fa fa-chevron-down"></i></a>
-					<ul class="nav menu" role="tablist">
-						<li><a>Tarjeta 1<i class="icono derecha fas fa-angle-right"></i></a></li>
-						<li><a>Tarjeta 2<i class="icono derecha fas fa-angle-right"></i></a></li>
-						<li><a href="tarjetas.html">Añadir tarjeta<i class="icono derecha fas fa-angle-right"></i></a></li>
+					<ul  id="datosEjemplo" class="nav menu" role="tablist">
 					</ul>
 				</li>
 				<li><a href="#"><i class="icono izquierda fas fa-dollar-sign"></i>Recargas<i class="icono derecha fa fa-chevron-down"></i></a>
@@ -120,11 +67,12 @@
 					</ul>
 				</li>
 				<li><a href="transferencia.html"><i class="icono izquierda fas fa-exchange-alt"></i>Transacciones<i class="icono derecha fas fa-angle-right"></i></a></li>
+				<li><a href="ajustes.html">Perfil<i class="icono derecha fas fa-angle-right"></i></a></li>
+				<li><a href="#" id="botonMapa">Mapa ejemplo<i class="icono derecha fas fa-angle-right"></i></a></li>
 				<li><a href="#">Cerrar Sesion<i class="icono derecha fas fa-angle-right"></i></a></li>
-				<li><a href="ajustes.html">Ajustes<i class="icono derecha fas fa-angle-right"></i></a></li>
 			</ul>
 		</div>
-		</div>
+	</div>
 	</nav>
 
 	<div class="row-content">
@@ -133,7 +81,6 @@
 		
 	<div class="cajas">	
 	</div>
-     
     <div class="col-md-3">
     </div>
 	<div class="col-md-6" id="inputs">
@@ -148,11 +95,13 @@
             	</div>                
 				</div>
           	  	<h3>Monto</h3>
-        		<input  class="form-control"  type="text" placeholder="$ 0.00">
-        		<br>
-        		<br>
-        		<br>
-				<input type="button" class="form-control" id="btnRegistro"value="Recargar">
+          	  	<form id="formulario">
+          	  		<input id="monto" name="monto" class="form-control"  type="text" placeholder="$ 0.00">
+	        		<br>
+	        		<br>
+	        		<br>
+					<button type="submit" class="form-control" id="btnRecarga" >Recargar</button>
+          	  	</form>  		
 			</div>
 			<div class="col-xs-1">
 			</div>
@@ -162,6 +111,9 @@
 	</div>
 	</div> 
 </div>
+<script type="text/javascript" src="../cordova.js"></script>
 <script src="../js/menuLateral.js"></script>
+<script  src="../js/rcgBanco.js"></script>
+<script  src="../js/datos.js"></script>
 </body>
 </html>

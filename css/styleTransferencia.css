@@ -1,0 +1,63 @@
+/*Linea de color*/
+	#div{
+	    width: 100%;
+	    font-size: 5px; font-weight:bold; text-align:center;
+	    padding-top: 5px; word-wrap:break-word;
+	}
+
+	.form-control {
+		height: 50px;
+		border-radius: 10px;
+		border: 2px solid #ccc;
+		margin: 2px ; 
+	}
+
+	#monto{
+		font-size: 30px;
+		color: #77C32A;
+		font-family: 'Roboto Regular' 30px;
+		font-weight: 600;
+		text-align: center;
+		height: 60px;
+	}   
+
+    h3 {
+		font-family: 'Roboto Regular' 22px;
+    }
+
+	button[type=submit] {
+  
+    margin: auto;
+    font-size: 20px;
+    color: white;
+    background-color: #3690E6;
+    border-radius: 30px;
+    border: 20px;
+
+	}
+
+	  #numero-error{
+    color: red;
+  }
+
+  #monto-error{
+    color: red;
+  }
+
+   #password + .glyphicon {
+   cursor: pointer;
+   pointer-events: all;
+ }
+
+	/* Styles for CodePen Demo Only */
+	#wrapper {
+	  max-width: 750px;
+	 
+	  padding-top: 2vh;
+	}
+
+	.glyphicon{
+		position: absolute;
+		top: 10px;
+		
+	}

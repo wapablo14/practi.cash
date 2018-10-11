@@ -1,0 +1,17 @@
+#div{
+	    width: 100%;
+	    font-size: 5px; font-weight:bold; text-align:center;
+	    padding-top: 5px; word-wrap:break-word;
+	}
+	#pagos {
+		color: #54358B;
+		font-weight: 600;
+	}
+	#recargas {
+		color: #77C32A;
+		font-weight: 600;
+	}
+	#transacciones {
+		color: #3690E6;
+		font-weight: 600;
+	}
