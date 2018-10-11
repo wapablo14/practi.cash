@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>plantilla para phonegap</title>
+	<title>Registrar tarjeta</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -50,7 +50,7 @@
 	<div id="mySidenav" class="contenedor-menu" data-status="disabled">
 		<div class="row menu-lateral">
 			<div class="col-xs-6">
-				<a>Nombre Usuario </a>
+				<a id="btnEjemplo"></a>
 			</div>
 			<div class="col-xs-6">
 				<img src="../img/fotoUsuario.png">
@@ -60,10 +60,7 @@
 			<ul class="nav menu" role="tablist">
 				<li><a href="movimientos.html"><i class="icono izquierda fas fa-book"></i>Historial<i class="icono derecha fas fa-angle-right"></i></a></li>
 				<li><a href="#"><i class="icono izquierda fas fa-credit-card"></i>Cartera<i class="icono derecha fa fa-chevron-down"></i></a>
-					<ul class="nav menu" role="tablist">
-						<li><a>Tarjeta 1<i class="icono derecha fas fa-angle-right"></i></a></li>
-						<li><a>Tarjeta 2<i class="icono derecha fas fa-angle-right"></i></a></li>
-						<li><a href="tarjetas.html">Añadir tarjeta<i class="icono derecha fas fa-angle-right"></i></a></li>
+					<ul  id="datosEjemplo" class="nav menu" role="tablist">
 					</ul>
 				</li>
 				<li><a href="#"><i class="icono izquierda fas fa-dollar-sign"></i>Recargas<i class="icono derecha fa fa-chevron-down"></i></a>
@@ -73,6 +70,9 @@
 					</ul>
 				</li>
 				<li><a href="transferencia.html"><i class="icono izquierda fas fa-exchange-alt"></i>Transacciones<i class="icono derecha fas fa-angle-right"></i></a></li>
+				<li><a href="ajustes.html">Perfil<i class="icono derecha fas fa-angle-right"></i></a></li>
+				<li><a href="#" id="botonMapa">Mapa ejemplo<i class="icono derecha fas fa-angle-right"></i></a></li>
+				<li><a href="#">Cerrar Sesion<i class="icono derecha fas fa-angle-right"></i></a></li>
 			</ul>
 		</div>
 	</div>
@@ -86,28 +86,47 @@
 		<div class="col-md-3" >
 		</div>	
 		<div class="col-md-6">
-		<div class="container-fluid">
 			<h2>Tipo Tarjeta</h2><br>
-			<div class="row text-center">
-				<div class="col-xs-2">
-					<img id="imgs" class="trja" src="../img/creditcard-a.png" >
-			    </div> 
-			    <div class="col-xs-2">
-					<img id="img" src="../img/creditcard-b.png">
-			    </div>
-			    <div class="col-xs-2">
-					<img id="img" src="../img/creditcard-c.png" >
-			    </div>
-			    <div class="col-xs-2">
-					<img id="img" src="../img/creditcard-d.png" >
-			    </div>
-			    <div class="col-xs-2">
-					<img id="img" src="../img/creditcard-e.png">
-			    </div>
-			    <div class="col-xs-2">
-				</div>
+			<div class="row">
+				<form>
+					<div class="form-group">
+						<div class="col-xs-1">
+						</div>
+						<div class="col-xs-2">
+						<label>
+						<img id="img" src="../img/creditcard-a.png" alt="..." class="img-check">
+						<input type="checkbox" name="check" id="imgCheck" value="American Express" class="hidden" autocomplete="off">
+						</label>
+						</div> 
+						<div class="col-xs-2">
+						<label>
+						<img id="img" src="../img/creditcard-b.png" alt="..." class="img-check">
+						<input type="checkbox" name="check" id="imgCheck" value="Discover" class="hidden" autocomplete="off">
+						</label>
+						</div>
+						<div class="col-xs-2">
+						<label>
+						<img id="img" src="../img/creditcard-c.png" alt="..." class="img-check">
+						<input type="checkbox" name="check" id="imgCheck" value="Mastercard" class="hidden" autocomplete="off">
+						</label>
+						</div>
+						<div class="col-xs-2">
+						<label>
+						<img id="img" src="../img/creditcard-d.png"  alt="..." class="img-check">
+						<input type="checkbox" name="check" id="imgCheck" value="Mastercard" class="hidden" autocomplete="off">
+						</label>
+						</div>
+						<div class="col-xs-2">
+						<label>
+						<img id="img" src="../img/creditcard-e.png"  alt="..." class="img-check">
+						<input type="checkbox" name="check" id="imgCheck" value="Visa" class="hidden" autocomplete="off">
+						</label>
+						</div>
+						<div class="col-xs-1">
+						</div>
+					</div>
+				</form>
 			</div>
-		</div>
 		<br>
 		<div class=" container-fluid" >
 			<div class="row">
@@ -121,7 +140,7 @@
 					</select>
 					<br>
 					<form id="formulario" >
-						<input class="form-control" type="text" id="tarjeta" name="tarjeta" placeholder="# Tarjeta">
+						<input class="form-control" type="text" id="numero" name="numero" placeholder="# Tarjeta">
 						<br>
 						<form>
 						<div class="form-group">   
@@ -131,10 +150,10 @@
 						<span class="add-on"><i class="icon-th"></i></span>
 						</div>
 						<br>
-						<input class="form-control" type="text"  id="cvv" name="cvv" placeholder="CVV">
+						<input class="form-control" type="text"  id="cv" name="cv" placeholder="CV">
 						<br>
 						<button type="submit" class="form-control" id="btnRegistrar">Registrar</button> 
-						</div>
+						</br>
 						</form>
 					</form>			
 				<div class="col-md-3"></div>
@@ -148,10 +167,11 @@
 		</div>	
 	</div> 
 </div>
-<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="../cordova.js"></script>
 <script src="../js/menuLateral.js"></script>
 <script src="../js/calendarioTarjetas.js"></script>
 <script src="../js/tarjetas.js"></script>
+<script src="../js/datos.js"></script>
 <script>
 	
 </script>

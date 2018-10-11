@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>plantilla para phonegap</title>
+	<title>Recarga tarjeta</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -28,7 +28,7 @@
 		<div class="topnav">
 		<!-- Centered link -->
 		<div class="topnav-centered">
-			<a href="#home" class="active">Registrar tarjeta</a>
+			<a href="#home" class="active">Recargar tarjeta</a>
 		</div> 
 		
 		<!-- Left-aligned links (default) -->
@@ -42,10 +42,10 @@
 		</div>
 		</div>
 	<nav class="nav">
-		<div id="mySidenav" class="contenedor-menu" data-status="disabled">
+	<div id="mySidenav" class="contenedor-menu" data-status="disabled">
 		<div class="row menu-lateral">
 			<div class="col-xs-6">
-				<a>Nombre Usuario </a>
+				<a id="btnEjemplo"></a>
 			</div>
 			<div class="col-xs-6">
 				<img src="../img/fotoUsuario.png">
@@ -55,10 +55,7 @@
 			<ul class="nav menu" role="tablist">
 				<li><a href="movimientos.html"><i class="icono izquierda fas fa-book"></i>Historial<i class="icono derecha fas fa-angle-right"></i></a></li>
 				<li><a href="#"><i class="icono izquierda fas fa-credit-card"></i>Cartera<i class="icono derecha fa fa-chevron-down"></i></a>
-					<ul class="nav menu" role="tablist">
-						<li><a>Tarjeta 1<i class="icono derecha fas fa-angle-right"></i></a></li>
-						<li><a>Tarjeta 2<i class="icono derecha fas fa-angle-right"></i></a></li>
-						<li><a href="tarjetas.html">Añadir tarjeta<i class="icono derecha fas fa-angle-right"></i></a></li>
+					<ul  id="datosEjemplo" class="nav menu" role="tablist">
 					</ul>
 				</li>
 				<li><a href="#"><i class="icono izquierda fas fa-dollar-sign"></i>Recargas<i class="icono derecha fa fa-chevron-down"></i></a>
@@ -68,17 +65,20 @@
 					</ul>
 				</li>
 				<li><a href="transferencia.html"><i class="icono izquierda fas fa-exchange-alt"></i>Transacciones<i class="icono derecha fas fa-angle-right"></i></a></li>
+				<li><a href="ajustes.html">Perfil<i class="icono derecha fas fa-angle-right"></i></a></li>
+				<li><a href="#" id="botonMapa">Mapa ejemplo<i class="icono derecha fas fa-angle-right"></i></a></li>
+				<li><a href="#">Cerrar Sesion<i class="icono derecha fas fa-angle-right"></i></a></li>
 			</ul>
 		</div>
-		</div>
+	</div>
 	</nav>
 
 	<div class="row-content">
 		<div class="ssm-overlay ssm-toggle-nav"></div>
 	</div>
-	<div class="cajas"> 	
+	<div class="cajas"> 
+	
 	</div>
-     
 	<div class="col-md-3">
 	</div>
 	<div class="col-md-6" id="inputs">
@@ -112,8 +112,11 @@
 	</div>
 	</div> 
 </div>
+
+<script type="text/javascript" src="../cordova.js"></script>
 <script src="../js/menuLateral.js"></script>
 <script src="../js/rcgtarjeta.js"></script>
+<script src="../js/datos.js"></script>
 <script src="../js/contra.js"></script>
 <script src="../js/hideShowPassword.min.js"></script>
 </body>

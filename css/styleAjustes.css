@@ -2,9 +2,7 @@
 	    width: 100%;
 	    font-size: 5px; font-weight:bold; text-align:center;
 	    padding-top: 5px; word-wrap:break-word;
-	}
-
- 
+	} 
 
 	 .form-control {
     height: 50px;
@@ -12,8 +10,8 @@
     border: 2px solid #ccc;
     margin: 2px ;
 	}
-
-    .icono {
+	
+    #icon {
     font-size: 50px;
     padding: 25px;
     margin: 40px;
