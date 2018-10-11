@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Tranferencias</title>
+	<title>plantilla para phonegap</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -12,10 +12,45 @@
 	<script src="http://labs.rampinteractive.co.uk/touchSwipe/jquery.touchSwipe.min.js"></script>
 	<!-- Sliding swipe menu javascript file -->
 	<script src="../js/menuDesplegable/jquery.slideandswipe.js"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
 	<link rel="stylesheet" href="../css/styleMenu.css" type="text/css" media="all">
-	<link rel="stylesheet" type="text/css" href="../css/styleTransferencia.css" media="all">
+<style>
+	
+	#div{
+	    width: 100%;
+	    font-size: 5px; font-weight:bold; text-align:center;
+	    padding-top: 5px; word-wrap:break-word;
+	}
 
+	.form-control {
+		height: 50px;
+		border-radius: 10px;
+		border: 2px solid #ccc;
+		margin: 2px ; 
+	}
+
+	#monto{
+		font-size: 30px;
+		color: #77C32A;
+		font-family: 'Roboto Regular' 30px;
+		font-weight: 600;
+		text-align: center;
+		height: 60px;
+	}   
+
+    h3 {
+		font-family: 'Roboto Regular' 22px;
+    }
+
+	input[type=button] {
+		margin: auto;
+		font-size: 20px;
+		color: white;
+		background-color: #3690E6;
+		border-radius: 30px;
+		border: 20px;
+	}
+
+</style>
 </head>
 
 <body>
@@ -28,7 +63,7 @@
 		<div class="topnav">
 		<!-- Centered link -->
 		<div class="topnav-centered">
-			<a href="#home" class="active">Tranferencias.</a>
+			<a href="#home" class="active">Transacciones</a>
 		</div> 
 		
 		<!-- Left-aligned links (default) -->
@@ -42,10 +77,10 @@
 		</div>
 		</div>
 	<nav class="nav">
-	<div id="mySidenav" class="contenedor-menu" data-status="disabled">
+		<div id="mySidenav" class="contenedor-menu" data-status="disabled">
 		<div class="row menu-lateral">
 			<div class="col-xs-6">
-				<a id="btnEjemplo"></a>
+				<a>Nombre Usuario </a>
 			</div>
 			<div class="col-xs-6">
 				<img src="../img/fotoUsuario.png">
@@ -55,7 +90,10 @@
 			<ul class="nav menu" role="tablist">
 				<li><a href="movimientos.html"><i class="icono izquierda fas fa-book"></i>Historial<i class="icono derecha fas fa-angle-right"></i></a></li>
 				<li><a href="#"><i class="icono izquierda fas fa-credit-card"></i>Cartera<i class="icono derecha fa fa-chevron-down"></i></a>
-					<ul  id="datosEjemplo" class="nav menu" role="tablist">
+					<ul class="nav menu" role="tablist">
+						<li><a>Tarjeta 1<i class="icono derecha fas fa-angle-right"></i></a></li>
+						<li><a>Tarjeta 2<i class="icono derecha fas fa-angle-right"></i></a></li>
+						<li><a href="tarjetas.html">Añadir tarjeta<i class="icono derecha fas fa-angle-right"></i></a></li>
 					</ul>
 				</li>
 				<li><a href="#"><i class="icono izquierda fas fa-dollar-sign"></i>Recargas<i class="icono derecha fa fa-chevron-down"></i></a>
@@ -65,18 +103,15 @@
 					</ul>
 				</li>
 				<li><a href="transferencia.html"><i class="icono izquierda fas fa-exchange-alt"></i>Transacciones<i class="icono derecha fas fa-angle-right"></i></a></li>
-				<li><a href="ajustes.html">Perfil<i class="icono derecha fas fa-angle-right"></i></a></li>
-				<li><a href="#" id="botonMapa">Mapa ejemplo<i class="icono derecha fas fa-angle-right"></i></a></li>
 				<li><a href="#">Cerrar Sesion<i class="icono derecha fas fa-angle-right"></i></a></li>
+				<li><a href="ajustes.html">Ajustes<i class="icono derecha fas fa-angle-right"></i></a></li>
 			</ul>
 		</div>
-	</div>
+		</div>
 	</nav>
-
 	<div class="row-content">
 		<div class="ssm-overlay ssm-toggle-nav"></div>
 	</div>
-	
     <div class="cajas">   	
     </div>
      
@@ -87,24 +122,17 @@
 			<div class="col-xs-1">
 			</div>
 			<div class="col-xs-10" >
-				<form id="formulario">
-					</br>
-					<input id="numero" name="numero" class="form-control"  type="text" placeholder="Numero Contacto">
-					<br>
-					<h3>Monto</h3>
-					<input  id="monto" name="monto" class="form-control"  type="text" placeholder="$ 0.00">
-					<br>
-					<div id="wrapper">
-					  <div class="form-group has-feedback">
-					    <input type="password" class="form-control" id="password" placeholder="Contraseña">
-					    <i class="glyphicon glyphicon-eye-open form-control-feedback"></i>
-					  </div>
-					</div>
-					<br>
-					<br>
-					<button type="submit"  class="form-control" id="btnTransferir" >Transferir</button> 
-				</form>
-					
+				</br>
+				<p> Ingrese numero a ser tranferido. </p>
+				<input  class="form-control"  type="text" placeholder="Numero Contacto">
+				<br>
+          	  	<h3>Monto</h3>
+        		<input  id="monto" class="form-control"  type="text" placeholder="$ 0.00">
+        		<br>
+				<input  class="form-control"  type="password" placeholder="Contraseña">
+        		<br>
+        		<br>
+				<input type="button" class="form-control" id="btnRegistro"value="Transferir">
 			</div>
 			<div class="col-xs-1">
 			</div>
@@ -114,11 +142,6 @@
 	</div>
 	</div> 
 </div>
-<script type="text/javascript" src="../cordova.js"></script>
 <script src="../js/menuLateral.js"></script>
-<script src="../js/transferencia.js"></script>
-<script src="../js/contra.js"></script>
-<script src="../js/hideShowPassword.min.js"></script>
-<script src="../js/datos.js"></script>
 </body>
 </html>
