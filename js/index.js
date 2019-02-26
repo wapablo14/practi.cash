@@ -46,7 +46,7 @@ $(document).ready(function(){
 						var dataString="numero="+numero+"&insert=";
 						$.ajax({
 							type: "POST",
-							url:"https://paulina96madrid.000webhostapp.com/datosPrueba/loginPrueba.php",
+							url:"prueba_registro_usuario.php",
 							data: dataString,
 							crossDomain: true,
 							cache: false,
