@@ -65,7 +65,7 @@
 				<li><a href="transferencia.html"><i class="icono izquierda fas fa-exchange-alt"></i>Transacciones<i class="icono derecha fas fa-angle-right"></i></a></li>
 				<li><a href="ajustes.html">Perfil<i class="icono derecha fas fa-angle-right"></i></a></li>
 				<li><a href="#" id="botonMapa">Mapa ejemplo<i class="icono derecha fas fa-angle-right"></i></a></li>
-				<li><a href="#">Cerrar Sesion<i class="icono derecha fas fa-angle-right"></i></a></li>
+				<li><a href="#" id="cerrar_se">Cerrar Sesion<i class="icono derecha fas fa-angle-right"></i></a></li>
 			</ul>
 		</div>
 	</div>
@@ -76,14 +76,16 @@
 </div>
 
 <div id="saludo" class="row">
-	<label id="hola">Hola, Nombre Apellido</label>
+<!-- modificado para que muetre el nombre pero no el apellido-->	
+	<label id="hola">Hola, <label id="nombre_t_cli"></label> Apellido</label>
 </div>
 
 <div class="row">
 	<a id="imgs"><img id="img"src="../img/fotodeusuario.jpg"></a>
 		<div class="container-fluid" id="monto" >
 			<label id="actual">Saldo Actual</label>
-			<h1 >$0.00</h1>      
+<!-- modificado para que muestre el saldo actual-->			
+			<h1 id="saldo_actual"></h1>      
 			<br>
 		</div>
 </div>
@@ -101,7 +103,8 @@
 					<th>Saldo</th>
 				</tr>
             </thead>
-            <tbody>
+            <tbody id="tabla_general">
+            	<!--
 				<tr>
 					<td>10/09/2018</td>
 					<td style="font-weight: 600">Pago</td>
@@ -117,6 +120,7 @@
 					<td style="font-weight: 600">Transaccion</td>
 					<td id="transacciones">$100</td>
 				</tr>
+			-->
             </tbody>
 		</table>
 	</div> 

@@ -2,15 +2,27 @@
   include "bd.php";
   error_reporting(0);
 
+////////////////////////////////
+//$_POST['nombre_funcion']="a_pago";
+
+		//$_POST['numero']=2132;
+		//$_POST['clave']=22322;
+		//$_POST['fecha_entrada']="sdsd";
+///////////////////
+
 if(isset($_POST['nombre_funcion']))
 {
 
 	$caso_funcion = $_POST['nombre_funcion'];
 
+//************************************** funcion para Suscribir
+
+//*************************************
+
 	if ($caso_funcion == "a_suscribir")
 	{
 	 if(isset($_POST['numero']) && isset($_POST['clave']) && isset($_POST['fecha_entrada']) )
-		 {
+	 {
 		$numero_suscribir = $_POST['numero'];
 		$clave_suscribir = $_POST['clave'];
 		$fecha_entrada = $_POST['fecha_entrada'];
@@ -18,19 +30,28 @@ if(isset($_POST['nombre_funcion']))
 		//echo "numero suscribir: ".$numero_suscribir." clave suscribir: ".$clave_suscribir." fecha entrada: ".$fecha_entrada;
 
 
-			$sql_validar_clave = "SELECT cla.id, cla.clave, cla.fecha_caducidad, cla.id_cliente FROM claves cla WHERE cla.clave = '$clave_suscribir'";
+		$sql_validar_clave = "SELECT cla.id, cla.clave, cla.fecha_caducidad, cla.id_cliente FROM claves cla WHERE cla.clave = '$clave_suscribir'";
 
-			$resultado_sql_validar_clave=pg_query($cone,$sql_validar_clave);
-			$ind_clave=0;
-			$ind_mensaje_cad_fe =0;
+		$resultado_sql_validar_clave=pg_query($cone,$sql_validar_clave);
+		$ind_clave=0;
+		$ind_mensaje_cad_fe =0;
+
+
+
+		$respuestas_suscribir = array(
+			0=>array('error_clave' => 'error, la clave ya caduco'),
+			1=>array('bien' => 'success'),
+			2=>array('error_bd' => 'error al insertar en base de datos'),
+			3=>array('error_no_clave' => 'error no se encontro la clave')
+			);
 
 		//si encuentra la clave, se verifica la fecha si es menor que la de caducidad
 		//datos de prueba:
 
-		$fecha_p = "2019-09-01"; //formato aaaa-mm-dd
+		$fecha_p = "2019-08-01"; //formato aaaa-mm-dd
 
 		//formato de fecha aaaa-mm-dd
-		$fecha_entrada= strtotime($fecha_p);
+		$fecha_entrada2 = strtotime($fecha_p);//strtotime($fecha_entrada_a_m_d)
 
 		$nombre_cliente = "ramon";
 		$es_activo ="1";
@@ -42,17 +63,18 @@ if(isset($_POST['nombre_funcion']))
 				{
 				$fecha_en_tabla = strtotime($row1['fecha_caducidad']);
 
-					if($fecha_entrada > $fecha_en_tabla)
+					if($fecha_entrada2 > $fecha_en_tabla)
 					{
-						echo "error. la clave ya caduco";
+						//echo "error. la clave ya caduco";
 						$ind_mensaje_cad_fe =1;
+						echo json_encode($respuestas_suscribir[0]);
 						break;
 					}	
 
 					$ind_clave=1;
 
 
-					if($fecha_entrada <= $fecha_en_tabla)
+					if($fecha_entrada2 <= $fecha_en_tabla)
 					{
 
 						$sql_registro_cliente ="INSERT  INTO clientes(nombre_cliente,telefono,activo,keyt) VALUES('$nombre_cliente',$numero_suscribir,'$es_activo','$key_rand')
@@ -61,11 +83,13 @@ if(isset($_POST['nombre_funcion']))
 
 						if ($resultado_sql_registro_cliente==true) 
 						{
-							echo "success";
+							//echo "success";
+							echo json_encode($respuestas_suscribir[1]);
 						}
 						if ($resultado_sql_registro_cliente==false) 
 						{
-							echo "error al insertar en base de datos";
+							//echo "error al insertar en base de datos";
+							echo json_encode($respuestas_suscribir[2]);
 						}
 						
 						$ind_mensaje_cad_fe =1;
@@ -80,7 +104,8 @@ if(isset($_POST['nombre_funcion']))
 
 			if($ind_clave==0 && $ind_mensaje_cad_fe ==0) 
 			{
-				echo "error. no se encontro la clave";
+				//echo "error. no se encontro la clave";
+				echo json_encode($respuestas_suscribir[3]);
 			}
 			
 			$accion_suscribir = "";
@@ -96,10 +121,10 @@ if(isset($_POST['nombre_funcion']))
 	$telefono_saldo=123213; 
 	$key_saldo=343;
 	*/
-	elseif($caso_funcion == "ver_saldo")
+	if($caso_funcion == "ver_saldo")
 	{
 		if(isset($_POST['telefono']) && isset($_POST['key']) )
-			 {
+		{
 		$telefono_saldo=$_POST['telefono'];
 		$key_saldo = $_POST['key'];
 
@@ -147,7 +172,7 @@ if(isset($_POST['nombre_funcion']))
 	$telefono_transaccion = 4323;
 	$key_transaccion = "qwe";
 	*/
-	elseif($caso_funcion == "a_transaccion")
+	if($caso_funcion == "a_transaccion")
 	{
 		if(isset($_POST['telefono_transaccion']) && isset($_POST['key_transaccion']) )
 	    {
@@ -201,7 +226,7 @@ if(isset($_POST['nombre_funcion']))
 			$arreglo_valor2[9] = $arreglo_valor[9];
 
 
-			$a =sizeof($arreglo_valor);
+			//$a =sizeof($arreglo_valor); esto no hace falta
 
 			foreach($arreglo_valor as $indice=> $valor) 
 			{
@@ -300,7 +325,7 @@ if(isset($_POST['nombre_funcion']))
 	$telefono_cliente_tarjeta =123213;
 	$key_tarjeta= "123";
 	*/
-	elseif($caso_funcion == "a_tarjeta")
+	if($caso_funcion == "a_tarjeta")
 	{
 		if(isset($_POST['telefono_cliente_tarjeta']) && isset($_POST['key_tarjeta']) )
 	    {
@@ -351,7 +376,7 @@ if(isset($_POST['nombre_funcion']))
 	$telefono_cliente_perfil =123213;
 	$key_perfil= "123";
 	*/
-	elseif ($caso_funcion == "a_perfil")
+	if ($caso_funcion == "a_perfil")
 	{
 			if(isset($_POST['telefono_cliente_perfil']) && isset($_POST['key_perfil']) )
 		    {
@@ -360,7 +385,7 @@ if(isset($_POST['nombre_funcion']))
 			$key_perfil= $_POST['key_perfil'];
 			//aqui se obtiene el id del cliente utilizado el numero de telefono
 
-				$sql_id_cliente_p = "SELECT cli.id, cli.telefono, cli.nombre_cliente, cli.apellido_cliente FROM clientes cli WHERE cli.telefono = '$telefono_cliente_perfil'
+				$sql_id_cliente_p = "SELECT cli.id, cli.telefono, cli.nombre_cliente FROM clientes cli WHERE cli.telefono = '$telefono_cliente_perfil'
 			";
 				
 				$resultado_sql_id_cliente_p=pg_query($cone,$sql_id_cliente_p);
@@ -387,14 +412,15 @@ if(isset($_POST['nombre_funcion']))
 
 
 	//***********************esta es la parte del Pago
-	/*
-	$accion_pago = "pagar";
-	$telefono_paga = 123213;
-	$key_pagar = "123";
-	$valor_de_pago =5200;
-	$telefono_recibe = 4323;
-	*/
-	elseif ($caso_funcion == "a_pago")
+	
+
+
+/*			$_POST['telefono_paga']=123213;
+			$_POST['key_pagar'] ="123";
+			$_POST['valor_de_pago'] = 9996;
+			$_POST['telefono_recibe']=4323;
+*/	
+	if ($caso_funcion == "a_pago")
 	{
 		if(isset($_POST['telefono_paga']) && isset($_POST['key_pagar']) && isset($_POST['valor_de_pago']) && isset($_POST['telefono_recibe']))
 	    {
@@ -514,19 +540,22 @@ if(isset($_POST['nombre_funcion']))
 			$resultado_sql_guardar_transaccion_id_pa=pg_query($cone,$sql_guardar_transaccion_id_pa);
 
 
+//aqui se crea el mensaje de error en caso de que no se inserto el pago o el incremento
+		$respuestas_pago = array('error_pago' => 'error, hubo un error al procesar el pago');
 
-echo $valor_tem_paga." ".$valor_tem_re;
+//echo $valor_tem_paga." ".$valor_tem_re;
 		//echo $transaccion_id;
 		//aqui se construye el arreglo que despues sera convertido en json
 			$respuesta = array('id_transaccion' => $transaccion_id, 'mensa' => 'ok');
 
 		 	if($resultado_insertar_recibe==true && $resultado_insertar_pago==true)
 		 	{
-		  		//echo json_encode($respuesta);
+		  		echo json_encode($respuesta);
 		 	}
 		 	else
 		  	{
-		  		echo "error";
+		  		//echo "error";
+		  		echo json_encode($respuestas_pago);
 		  	}
 
 			$accion_pago = "";

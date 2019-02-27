@@ -36,6 +36,9 @@ $(document).ready(function(){
 					success: function(data){
 					if(data == "success"){    
 						localStorage.loginstatus = "true";
+						////////
+						sessionStorage.setItem("numero_secion","123213");
+						//////////						
 						window.location.href = "Paginas/usuario.html";
 					}
 					else if(data == "error"){
@@ -46,7 +49,7 @@ $(document).ready(function(){
 						var dataString="numero="+numero+"&insert=";
 						$.ajax({
 							type: "POST",
-							url:"https://paulina96madrid.000webhostapp.com/datosPrueba/loginPrueba.php",
+							url:"api/cal_saldo.php",
 							data: dataString,
 							crossDomain: true,
 							cache: false,
