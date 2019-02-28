@@ -49,7 +49,9 @@ $(document).ready(function(){
 						var dataString="numero="+numero+"&insert=";
 						$.ajax({
 							type: "POST",
+
 							url:"api/cal_saldo.php",
+
 							data: dataString,
 							crossDomain: true,
 							cache: false,

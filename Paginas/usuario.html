@@ -42,30 +42,46 @@
 	<nav class="nav">
 	<div id="mySidenav" class="contenedor-menu" data-status="disabled">
 		<div class="row menu-lateral">
+
+<!-- se oculto el boton Perfil y lo que el generaba se le agrego al a btnEjemplo y al img foto-peque, asignacion 1 -->			
 			<div class="col-xs-6">
-				<a id="btnEjemplo"></a>
+				<a id="btnEjemplo" href="ajustes.html">     </a>
 			</div>
 			<div class="col-xs-6">
-				<img src="../img/fotoUsuario.png">
+				<img id="foto-peque" src="../img/fotoUsuario.png">
 			</div>
 		</div>
 		<div class="row">
 			<ul class="nav menu" role="tablist">
-				<li><a href="movimientos.html"><i class="icono izquierda fas fa-book"></i>Historial<i class="icono derecha fas fa-angle-right"></i></a></li>
-				<li><a href="#"><i class="icono izquierda fas fa-credit-card"></i>Cartera<i class="icono derecha fa fa-chevron-down"></i></a>
+<!-- antes se llamaba transacciones, ahora se llama Pagar y se coloco de primero, asignacion 1 -->
+				<li><a href="transferencia.html"><i class="icono izquierda fas fa-exchange-alt"></i>Pagar<i class="icono derecha fas fa-angle-right"></i></a></li>
+<!-- antes se llamaba historial, ahora se llama transacciones, asignacion 1 -->
+				<li><a href="movimientos.html"><i class="icono izquierda fas fa-book"></i>Transacciones<i class="icono derecha fas fa-angle-right"></i></a></li>
+
+<!-- se quito Cartera y se sustituyo por Tarjetas, asignacion 1 -->				
+				<li><a href="#"><i class="icono izquierda fas fa-credit-card"></i>Tarjetas<i class="icono derecha fa fa-chevron-down"></i></a>
 					<ul  id="datosEjemplo" class="nav menu" role="tablist">
 					</ul>
 				</li>
+<!-- se oculto recargas, asignacion 1
 				<li><a href="#"><i class="icono izquierda fas fa-dollar-sign"></i>Recargas<i class="icono derecha fa fa-chevron-down"></i></a>
 					<ul class="nav menu" role="tablist">
 						<li><a href="rcgtarjeta.html">Tarjeta<i class="icono derecha fas fa-angle-right"></i></a></li>
 						<li><a href="rcgbanco.html">Cuenta banco<i class="icono derecha fas fa-angle-right"></i></a></li>
 					</ul>
 				</li>
-				<li><a href="transferencia.html"><i class="icono izquierda fas fa-exchange-alt"></i>Transacciones<i class="icono derecha fas fa-angle-right"></i></a></li>
+
+-->
+
+<!-- este li fue eliminado y su link paso a la foto pequeña y al nombre				
 				<li><a href="ajustes.html">Perfil<i class="icono derecha fas fa-angle-right"></i></a></li>
+ -->
+
+ <!-- este li fue quitado, asignacion 1 
 				<li><a href="#" id="botonMapa">Mapa ejemplo<i class="icono derecha fas fa-angle-right"></i></a></li>
+
 				<li><a href="#" id="cerrar_se">Cerrar Sesion<i class="icono derecha fas fa-angle-right"></i></a></li>
+
 			</ul>
 		</div>
 	</div>
@@ -129,5 +145,6 @@
 <script src="../js/menuLateral.js"></script>
 <script type="text/javascript" src="../cordova.js"></script>
 <script type="text/javascript" src="../js/datos.js"></script>
+<script type="text/javascript" src="../js/eventos.js"></script>
 </body>
 </html>
