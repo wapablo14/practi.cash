@@ -3,12 +3,13 @@
   var n_session = sessionStorage.getItem("numero_secion");
 //alert("yyyyyr");
 
-      $("#btnTransferir").on("click", function(){
+/*      $("#btnTransferir").on("click", function(){
+
         var formulario = $("#formulario").validate
          ({
              rules: /* Accedemos a los campos.*/
-             {
-               numero: {required: true,digits: true, minlength: 10, maxlength: 10},
+  /*           {
+               numero: {required: true,digits: true, minlength: 5, maxlength: 10},
                monto: {required: true, digits: true},
               
              },
@@ -22,7 +23,9 @@
    
 
           /*Validacion correcta metodo.*/
-              submitHandler: function(form){
+
+/*              submitHandler: function(form){
+
 
             //aqui es donde va la parte del pago
             var key_pagar = $("#password").val();
@@ -56,7 +59,9 @@
               
                 }
               })  
-          }
+
+          }  
+
 
           return false;
           }
@@ -65,7 +70,7 @@
           
     
      
-         });
+         });*/
   });
 
   

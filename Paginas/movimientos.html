@@ -14,6 +14,9 @@
 	<script src="../js/menuDesplegable/jquery.slideandswipe.js"></script>
 	<link rel="stylesheet" href="../css/styleMenu.css" type="text/css" media="all">
 	<link rel="stylesheet" type="text/css" href="../css/styleMovimientos.css">
+
+    <link rel="stylesheet" href="../librerias/pika/css/pikaday.css">
+
 </head>
 <body>
 <div class="caja">
@@ -44,7 +47,7 @@
 				<a id="btnEjemplo"></a>
 			</div>
 			<div class="col-xs-6">
-				<img src="../img/fotoUsuario.png">
+				<img id="img_usuario" src="">
 			</div>
 		</div>
 		<div class="row">
@@ -63,7 +66,7 @@
 				<li><a href="transferencia.html"><i class="icono izquierda fas fa-exchange-alt"></i>Transacciones<i class="icono derecha fas fa-angle-right"></i></a></li>
 				<li><a href="ajustes.html">Perfil<i class="icono derecha fas fa-angle-right"></i></a></li>
 				<li><a href="#" id="botonMapa">Mapa ejemplo<i class="icono derecha fas fa-angle-right"></i></a></li>
-				<li><a href="#">Cerrar Sesion<i class="icono derecha fas fa-angle-right"></i></a></li>
+				<li><a href="#" id="cerrar_se">Cerrar Sesion<i class="icono derecha fas fa-angle-right"></i></a></li>
 			</ul>
 		</div>
 	</div>
@@ -72,13 +75,26 @@
 		<div class="ssm-overlay ssm-toggle-nav"></div>
 	</div>
 	<div class="row">
+	<!--                                                        -->	
+		<h4>Ultimas <span id="total_filas"> </span> transacciones</h4>
+		<div class="form-group">
+		
+
+<br>
+
 		<div class="Tabla">
+
             
-          <table class="table table-hover">
+
+          <table  id="mitabla" class="table table-bordered table-striped">
+
             <thead>
               <tr >
                 <th>Fecha</th>
+                <th>Concepto</th>
                 <th>Movimiento</th>
+                <th>Usuario</th>
+                <th>Monto</th>
                 <th>Saldo</th>
               </tr>
             </thead>
@@ -101,11 +117,184 @@
               </tr>-->
             </tbody>
            </table>
-        </div> 
+
+
+
+
+
+</div>
+
+		<div class="pagination-container" align="center">
+			<!-- <nav> -->
+				<ul class="pagination"></ul>
+			<!-- </nav> -->
+		</div>
+
+<hr>
+
+</div> <!-- este div va despues de  selecciona el rango -->
+<!--                                                          --->
+
+
+<hr>
+<!--  boton generear reporte en excel      -->
+			<button onclick="exportTableToExcel('mitabla');" class="btn btn-primary" align="center">Exportar a Excel</button>
+<br>
+<hr>
+
+<!--  boton generear reporte en excel      -->
+
+
+<!--
+		<div class="row">
+			<div class="col-md-6">
+			<select name="state" id="maxRows" class="form-control " style="width:150px;">
+				<option value="10">10</option>
+				<option value="25">25</option>
+				<option value="50">50</option>
+				
+			</select>
+			</div>
+			<div class="col-md-6">
+
+			</div>
+		</div> -->
+
+<br>
+
+
+<script src="../librerias/pika/pikaday.js"></script>
+	
+<div  id="capa_calendario" class="container"> <!-- este div es antepenultimo -->
+
+<div class="form-group">
+<input type="radio" name="act_calen" id="radio_fecha" value="0"> Por Fecha: <br>
+</div>
+
+<div class="container">
+
+	<div class="form-group">
+	        <label>Fecha Inicial</label>
+
+	<!-- para que el datepiker funcione debes poner el script abajo del input--->
+
+	<input type="text" id="datepicker1">
+
+
+	<script>
+    var picker = new Pikaday({ field: document.getElementById('datepicker1'),
+        format:'DD-MM-YYYY',
+        toString(date, format) {
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            const year = date.getFullYear();
+            if(day<10)
+            {
+                day="0"+day;
+            }
+            if(month<10)
+            {
+                month="0"+month;
+            }
+            return `${day}-${month}-${year}`;
+            }	                 
+         });
+	</script>
+	</div>
+
+	<div class="form-group">
+	<br>
+	    <label>Fecha Final </label>
+	    <input type="text" id="datepicker2">
+	    <script>
+	    var picker = new Pikaday({ field: document.getElementById('datepicker2'),
+	                format:'DD-MM-YYYY',
+	                toString(date, format) {
+	                    var day = date.getDate();
+	                    var month = date.getMonth() + 1;
+	                    const year = date.getFullYear();
+	                    if(day<10)
+	                    {
+	                        day="0"+day;
+	                    }
+                        if(month<10)
+                        {
+                            month="0"+month;
+                        }
+                        return `${day}-${month}-${year}`;
+                    }       
+            });
+        </script>
+	</div>
+</div>
+
+       
+
+        <!-- campo de los ultimos _ movimientos   -->
+		 <div class="form-group">
+			<hr>
+		 	<input type="radio" name="act_calen" id="radio_ran" value="0" checked> Los ultimos 
+		 	<input type="text" name="cant_filas" id="cant_filas" value="10" size="5"> movimientos
+			<hr>
+		</div>            
+
+		<div id="botones_calendario">
+			<hr>	
+		    <button id="buscar_tra" class="btn btn-primary btn-agre" ><span class="glyphicon glyphicon-search"></span>Consultar</button> 
+			<hr>
+		</div>
+
+	 </div> 	
+		<br><br><br>
 	</div>
 </div>
 <script type="text/javascript" src="../cordova.js"></script>
 <script src="../js/menuLateral.js"></script>
-<script type="text/javascript" src="../js/datos.js"></script>
+
+<script type="text/javascript" src="../js/jquery-qrcode-0.14.0.js"></script>
+
+
+<script type="text/javascript" src="../js/funciones.js"></script>
+
+
+<script src="../js/sweetalert.min.js"></script>
+
+<script type="text/javascript">
+	
+
+//ESTA ES LA FUNCION PARA  EXPORTAR EN EXCEL LA TABLA
+function exportTableToExcel(tableID, filename = ''){
+    var downloadLink;
+    var dataType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById(tableID);
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    
+    // Specify file name
+    filename = filename?filename+'.xls':'Consulta de Movimientos.xls';
+    
+    // Create download link element
+    downloadLink = document.createElement("a");
+    
+    document.body.appendChild(downloadLink);
+    
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+    
+        // Setting the file name
+        downloadLink.download = filename;
+        
+        //triggering the function
+        downloadLink.click();
+    }
+}
+
+</script>
+
 </body>
 </html>

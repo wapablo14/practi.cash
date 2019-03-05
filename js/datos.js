@@ -6,12 +6,17 @@
 	//alert(n_l_es_session);
 	//alert("ppppp");
 
+/*
+
 if (n_session==null) 
 {
 	sessionStorage.removeItem("numero_secion");
 	sessionStorage.clear();
 	window.location.href = "../index.html";
-}
+
+}*/
+/*
+
 	var numVal = localStorage.getItem("numResult");
 	var dataString="numVal="+numVal+"&selectDatos=";
 
@@ -206,5 +211,6 @@ if (n_session==null)
 					'PractiCash',            // title
 					'Registrar'                 // buttonName
 				);*/
-	
+/*	
 	});
+*/
