@@ -1,6 +1,5 @@
 $(document).ready(function(){
 	$('.nav').slideAndSwipe();
-		
 	$('.menu li:has(ul)').click(function(e){
 		e.preventDefault();
 

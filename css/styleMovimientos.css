@@ -15,3 +15,10 @@
 		color: #3690E6;
 		font-weight: 600;
 	}
+
+/*aqui configuro el tamaño de la barra de la tabla en movimientos.html*/
+
+	div.Tabla{
+		overflow: auto;
+		height: 330px;
+	}

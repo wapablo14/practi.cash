@@ -25,6 +25,13 @@ $(document).ready(function(){
 				
 				//Ajax comprobacion inputs.
 				var numero=$("#numero").val();
+////////////////////////////////////
+				var num1 = numero.substring(0,6);
+    			var tel1 = numero.substring(6,11);
+    			numero2 = numero;
+    			numero =num1;
+//alert(numero2+" "+num1+" "+tel1);
+/////////////////////////////
 				var dataString="numero="+numero+"&login=";
 				if($.trim(numero).length>0){
 				$.ajax({
@@ -36,6 +43,9 @@ $(document).ready(function(){
 					success: function(data){
 					if(data == "success"){    
 						localStorage.loginstatus = "true";
+						////////
+						sessionStorage.setItem("numero_secion",tel1);
+						//////////						
 						window.location.href = "Paginas/usuario.html";
 					}
 					else if(data == "error"){
@@ -46,7 +56,7 @@ $(document).ready(function(){
 						var dataString="numero="+numero+"&insert=";
 						$.ajax({
 							type: "POST",
-							url:"https://paulina96madrid.000webhostapp.com/datosPrueba/loginPrueba.php",
+							url:"api/cal_saldo.php",
 							data: dataString,
 							crossDomain: true,
 							cache: false,
