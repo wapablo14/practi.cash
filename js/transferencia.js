@@ -4,7 +4,6 @@
 //alert("yyyyyr");
 
 /*      $("#btnTransferir").on("click", function(){
-
         var formulario = $("#formulario").validate
          ({
              rules: /* Accedemos a los campos.*/
@@ -23,9 +22,7 @@
    
 
           /*Validacion correcta metodo.*/
-
 /*              submitHandler: function(form){
-
 
             //aqui es donde va la parte del pago
             var key_pagar = $("#password").val();
@@ -59,9 +56,7 @@
               
                 }
               })  
-
           }  
-
 
           return false;
           }

@@ -3,9 +3,7 @@
   error_reporting(0);
 
 ////////////////////////////////
-
 //$_POST['nombre_funcion']="a_transaccion";
-
 
 		//$_POST['numero']=2132;
 		//$_POST['clave']=22322;
@@ -53,7 +51,6 @@ if(isset($_POST['nombre_funcion']))
 		$imagen = $_FILES['imagen'];
 //		echo $imagen['type']." ".$imagen['tmp_name'];
 
-
 		//aqui se obtiene el id del cliente utilizado el numero de telefono
 
 			$sql_id_cliente = "SELECT cli.id, cli.telefono, cli.imagen FROM clientes cli WHERE cli.telefono = '$numero_suscribir'";
@@ -83,7 +80,6 @@ if(isset($_POST['nombre_funcion']))
 				$nuevo_nombre = $id_cli."-2019-03-05-03-04-56".".2";	
 			}
 
-
 //			$nuevo_nombre = $id_cli."-2019-03-05-03-04-56";
 			//$nuevo_nombre = $nuevo_nombre."-8";
 
@@ -108,7 +104,6 @@ if(isset($_POST['nombre_funcion']))
 		      }
 		    }
 		    
-
 
 
 		if ($imagen['type'] == "image/jpeg") 
@@ -155,7 +150,6 @@ if(isset($_POST['nombre_funcion']))
 		 
 
 
-
 		//$imagen = $_FILES['imagen'];
 /*
 		if()
@@ -180,7 +174,6 @@ if(isset($_POST['nombre_funcion']))
 
 						if($fecha_entrada2 > $fecha_en_tabla)
 						{
-
 							//echo "error. la clave ya caduco";
 							$ind_mensaje_cad_fe =1;
 							echo json_encode($respuestas_suscribir[0]);
@@ -209,14 +202,12 @@ if(isset($_POST['nombre_funcion']))
 							
 							$ind_mensaje_cad_fe =1;
 							break;
-
 						}
 						
 					}
 
 				}
 			//si no se encuentra la clave, se envia mensaje de error
-
 
 
 				if($ind_clave==0 && $ind_mensaje_cad_fe ==0) 
@@ -229,7 +220,6 @@ if(isset($_POST['nombre_funcion']))
 				$numero_suscribir = "";
 				$clave_suscribir = ""; 
 			}	 */
-
 		}
 	} 
 
@@ -286,7 +276,6 @@ if(isset($_POST['nombre_funcion']))
 	//********************************funciones para la transaccion
 
 	//este es el caso para hacer consultas
-
 /*	
 		$_POST['telefono_transaccion']=10002;
 		$_POST['key_transaccion']=3232;
@@ -295,7 +284,6 @@ if(isset($_POST['nombre_funcion']))
 
 */
 	
-
 	if($caso_funcion == "a_transaccion")
 	{
 		if(isset($_POST['telefono_transaccion']) && isset($_POST['key_transaccion']) )
@@ -352,7 +340,6 @@ if(isset($_POST['nombre_funcion']))
 					//echo "<br>";
 					//var_dump($arreglo_valor2);
 					$cant_saldo_po2 = $cant_saldo_po;
-
 
 
 					
@@ -837,9 +824,7 @@ if(isset($_POST['nombre_funcion']))
 			$key_perfil= $_POST['key_perfil'];
 			//aqui se obtiene el id del cliente utilizado el numero de telefono
 
-
 				$sql_id_cliente_p = "SELECT cli.id, cli.telefono, cli.nombre_cliente, cli.imagen FROM clientes cli WHERE cli.telefono = '$telefono_cliente_perfil'
-
 			";
 				
 				$resultado_sql_id_cliente_p=pg_query($cone,$sql_id_cliente_p);
@@ -868,14 +853,12 @@ if(isset($_POST['nombre_funcion']))
 	//***********************esta es la parte del Pago
 	
 
-
 /*
 			$_POST['telefono_paga']=10001;
 			$_POST['key_pagar'] ="123";
 			$_POST['valor_de_pago'] = 50;
 			$_POST['telefono_recibe']=10002;
 	*/
-
 	if ($caso_funcion == "a_pago")
 	{
 		if(isset($_POST['telefono_paga']) && isset($_POST['key_pagar']) && isset($_POST['valor_de_pago']) && isset($_POST['telefono_recibe']))
@@ -1090,7 +1073,6 @@ if(isset($_POST['nombre_funcion']))
 				$resultado_sql_guardar_transaccion_id_pa=pg_query($cone,$sql_guardar_transaccion_id_pa);
 
 
-
 	//aqui se crea el mensaje de error en caso de que no se inserto el pago o el incremento
 			$respuestas_pago = array(
 				0=>array('id' => 'error_pago', 'cabecera' => 'Pago no Realizado','cuerpo' => 'Hubo un problema al conectar con la base de datos')
@@ -1100,7 +1082,6 @@ if(isset($_POST['nombre_funcion']))
 				$respuesta = array(
 				0=>array('id' => 'success', 'cabecera' => 'Transaccion Exitosa','cuerpo' => 'Pago realizado con Exito')
 				);		
-
 
 			 	if($resultado_insertar_recibe==true && $resultado_insertar_pago==true)
 			 	{
