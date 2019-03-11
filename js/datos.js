@@ -5,18 +5,14 @@
 	
 	//alert(n_l_es_session);
 	//alert("ppppp");
-
 /*
-
 if (n_session==null) 
 {
 	sessionStorage.removeItem("numero_secion");
 	sessionStorage.clear();
 	window.location.href = "../index.html";
-
 }*/
 /*
-
 	var numVal = localStorage.getItem("numResult");
 	var dataString="numVal="+numVal+"&selectDatos=";
 
@@ -100,7 +96,7 @@ if (n_session==null)
 
 
 
-
+ 
 //aqui se muestra la tabla de los ultimos movimientos del usuario.html
 	var dataString4="nombre_funcion="+"a_transaccion"+"&telefono_transaccion="+n_session+"&key_transaccion="+"232";
 

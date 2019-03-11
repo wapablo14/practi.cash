@@ -44,9 +44,7 @@ $(document).ready(function(){
 					if(data == "success"){    
 						localStorage.loginstatus = "true";
 						////////
-
 						sessionStorage.setItem("numero_secion",tel1);
-
 						//////////						
 						window.location.href = "Paginas/usuario.html";
 					}
@@ -58,9 +56,7 @@ $(document).ready(function(){
 						var dataString="numero="+numero+"&insert=";
 						$.ajax({
 							type: "POST",
-
 							url:"api/cal_saldo.php",
-
 							data: dataString,
 							crossDomain: true,
 							cache: false,
