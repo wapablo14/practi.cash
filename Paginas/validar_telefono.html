@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+		
+	<title>Pagina ejemplo.</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
+	<link rel="stylesheet" href="../css/validar_telefono.css" type="text/css" media="all">
+	<link rel="stylesheet" href="../librerias/codigo_area/intlTelInput.css">
+
+</head>
+
+<body>
+
+<div class="container-fluid">
+	<div class="row content">
+		<div class="col-xs-1">
+		</div>
+		<div class="col-xs-10">
+			<div class="row">
+				<img src="../img/logoblanco.png"/>
+			</div>
+				<div class="row formulario_val">
+						<p id = 'titulo' >Por favor, ingresa los siguientes datos para validar su telefono.</p></br>
+						
+						<div class="form-group">
+							<label for="numero_tele" id="titulo_nu">Numero de Telefono:</label> <br>
+
+							<input type="tel" class="form-control" id="tel" name="numero_tele" placeholder="Ingrese numero de telefono"></br>
+						</div>
+
+						<div class="form-group" id="codigo_se">
+							<label for="cod_val" id="titulo_cod" ></label>
+
+							<input type="text" class="form-control" id="cod_val" name="cod_val" placeholder="Ingrese codigo SMS de Seguridad"></br>
+						</div>
+
+						<button  id="enviar_cod" class="btn btn-primary">Generar Codigo de Seguridad</button>
+
+						<button  id="boton_val" class="btn btn-primary">Validar Telefono</button>
+					
+					</br>
+					</br>
+					</br>
+			</div>
+
+
+
+<!-- aqui va el formulario de registrar el telefono -->
+			<div class="row formulario_re">
+					<p id = 'titulo' >Por favor, ingresa los siguientes datos para registrar su usuario.</p></br>
+					
+					<form enctype="multipart/form-data" id="registrarUsuario">
+
+						<input type="hidden" name="nombre_funcion" value="a_suscribir" id="nombre_funcion">
+						
+						<input type="hidden" name="clave" value="99999" id="clave_r_temp">
+
+						<input type="hidden" name="fecha_entrada" value="prueba" id="fecha_entrada">
+
+						<input type="hidden" name="numero" value="" id="numero_tele2">
+
+						<input type="hidden" name="caso" value="registrar_u" id="caso_suscribir">
+
+						<div class="form-group">
+							<label for="numero_tele3" id="titulo_nu2">Numero de Telefono:</label>
+
+							<input type="text" class="form-control" id="numero_tele3" value="" name="numero2"  disabled></br>
+						</div>
+
+
+						<div class="form-group">
+							<label for="numero_pin" id="titulo_pin">PIN secreto de pagos y Transacciones:</label>
+
+							<input type="text" class="form-control" id="numero_pin"  name="numero_pin"></br>
+						</div>
+
+
+						<div class="form-group">
+							<label for="foto" id="titulo_foto" >Foto:</label>
+
+							<input type="file" class="form-control" id="foto" name="foto" ></br>
+						</div>
+
+						<div class="form-group">
+							<label for="correo" id="ti_correo" >Correo:</label>
+
+							<input type="text" class="form-control" id="correo" name="correo" ></br>
+						</div>
+
+
+						<div class="form-group">
+							<label for="f_nacimento" id="ti_f_nacimiento" >Fecha de Nacimiento (dd-mm-aaaa):</label>
+
+							<input type="text" class="form-control" id="f_nacimiento" name="f_nacimiento" ></br>
+						</div>
+
+
+						<div class="form-group">
+							<label id="ti_sexo" >Sexo:</label>
+							<div id="capa_radios">
+
+								<input type="checkbox" name="sexo" id="sex_fem" value="femenino"> Femenino <br>
+
+								<input type="checkbox" name="sexo" id="sex_mas" value="masculino"> Masculino <br>
+							</div>
+						</div>	
+
+						<button type="submit" id="boton_registrar_usuario" class="btn btn-primary">Registrar Usuario</button>
+				</form>
+				
+				</br>
+				</br>
+				</br>
+			</div>
+
+
+		</div>
+		<div class="col-xs-1">
+		</div>
+
+
+		</div>
+		<div class="col-xs-1">
+		</div>
+	</div>
+</div>
+<!-- aqui finaliza el formulario de registrar el telefono-->
+
+
+
+
+	</div>
+</div>
+
+
+
+<script src="../js/sweetalert.min.js"></script>
+<script src="../js/funciones.js"></script>
+<script src="../librerias/codigo_area/intlTelInput.min.js"></script> 
+
+<script>
+      $("#tel").intlTelInput({
+      	allowDropdown: true,
+      	autoPlaceholder: "on",
+      	formatOnDisplay: true,
+      	separateDialCode: true
+      });
+</script>
+
+</body>
+</html>

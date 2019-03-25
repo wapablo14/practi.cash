@@ -2,6 +2,13 @@
   include "bd.php";
   error_reporting(0);
 
+//require __DIR__ . '/twilio-php-master/Twilio/autoload.php';
+include '../librerias/twilio-php-master/Twilio/autoload.php';
+
+// Use the REST API Client to make requests to the Twilio REST API
+use Twilio\Rest\Client;
+
+
 ////////////////////////////////
 //$_POST['nombre_funcion']="a_transaccion";
 
@@ -21,15 +28,635 @@ if(isset($_POST['nombre_funcion']))
 
 	if ($caso_funcion == "a_suscribir")
 	{
-	 if(isset($_POST['numero']) && isset($_POST['clave']) && isset($_POST['fecha_entrada']) )
+
+	 if(isset($_POST['numero']) && isset($_POST['clave']) && isset($_POST['fecha_entrada']))
 	 {
-		$numero_suscribir = $_POST['numero'];
+		$numero_suscribir1 = $_POST['numero'];
+		$numero_suscribir = "+".$numero_suscribir1;
+
 		$clave_suscribir = $_POST['clave'];
 		$fecha_entrada = $_POST['fecha_entrada'];
 
+		$caso = $_POST['caso'];
+
+		
+
+//aqui se verifica si el usuario ya estaba previamente registrado en el sistema
+		$sql_estaba_usuario = "SELECT count(cli.id) as cantidad FROM clientes cli WHERE cli.telefono = '$numero_suscribir1'";
+
+			$resultado_sql_estaba_usuario = pg_query($cone,$sql_estaba_usuario);
+
+			$fila4=pg_fetch_assoc($resultado_sql_estaba_usuario);
+
+			$estaba_usuario = $fila4['cantidad'];
+
+
+
+		if($caso == "generar_codigo_val" && $estaba_usuario==0) 
+		{
+			//aqui se genera el codigo de validacion
+			$codigo_val1 = rand(10001,99999);
+			$codigo_val = $codigo_val1." ";
+
+
+
+			$codigo_ramdom = rand(100001,999999);
+			$fecha_clave = date("Y-m-d");
+			$valor_tem_clave_i = date("Y-m-d H:i:s");
+
+				$fecha_clave =  $valor_tem_clave_i." ";
+				$partes_fecha = explode(" ",$fecha_clave);
+				$fecha_sin_es = $partes_fecha[0].$partes_fecha[1];
+				$fecha_sin_p_a = explode(":",$fecha_sin_es);
+				$fecha_sin_p = $fecha_sin_p_a[0].$fecha_sin_p_a[1].$fecha_sin_p_a[2];
+
+				$fecha_sin_g_a = explode("-",$fecha_sin_p);
+				$fecha_sin_g = $fecha_sin_g_a[0].$fecha_sin_g_a[1].$fecha_sin_g_a[2];
+			    $apikey = $fecha_sin_g."-".$codigo_ramdom;
+
+
+			//aqui registra en la tabla clientes
+			$sql_registro_cliente_t ="INSERT INTO clientes(nombre_cliente,telefono,activo,keyt,imagen,pin,correo, fecha_nacimiento,sexo) VALUES('nombre_temporal','$numero_suscribir1','0','$apikey','no_imagen','11111','correo_tem','fecha_n_tem','temporal')";
+			$resultado_sql_registro_cliente_t=pg_query($cone,$sql_registro_cliente_t);
+
+
+			//aqui registra en la tabla claves
+
+			$sql_obtener_id = "SELECT cli.id, cli.nombre_cliente,cli.telefono,cli.activo,cli.keyt FROM clientes cli WHERE cli.telefono = '$numero_suscribir1'";
+
+			$resultado_sql_obtener_id=pg_query($cone,$sql_obtener_id);
+
+			$fila2=pg_fetch_assoc($resultado_sql_obtener_id);
+
+			$id_cliente = $fila2['id'];
+
+//aqui se registra la fecha de caducidad, tiene 5 minutos de mas
+			$f_caducidad_t = date("Y-m-d H:i:s");
+
+			$f_caducidad_t2 = strtotime("+1 minute",strtotime($f_caducidad_t));
+
+			$f_caducidad = date("Y-m-d H:i:s",$f_caducidad_t2);
+
+			
+			$sql_registro_clave ="INSERT INTO claves(clave, fecha_caducidad,id_cliente) VALUES('$codigo_val1','$f_caducidad','$id_cliente')";
+			$resultado_sql_registro_clave=pg_query($cone,$sql_registro_clave);
+
+
+
+
+
+			$respuestas_suscribir = array(
+					0=>array('mensaje' => 'Codigo SMS enviado a tu telefono (tienes hasta 5 minutos para colocarlo)', 'id' => 'success'),
+					1=>array('mensaje' => 'Hubo un problema con la base de datos',
+						'id' =>'error')
+					);
+
+			if ($resultado_sql_registro_cliente_t==true) 
+			{
+	//aqui se crea la parametrizacion para usar twilio
+
+				$client1 = new Client($sid1, $token1); 
+				try {
+					// Use the client to do fun stuff like send text messages!
+					$client1->messages->create(
+						//aqui se coloca el numero de telefono alque llegara el codigo de validacion generado por twilio
+						$numero_suscribir, //activa este si quieres que funcione para todos los numeros de telefonos
+						//'+584268210636', //activa este si solo quieres que funcione para el telefono de pablo
+						array(
+						//aqui se coloca el numero de telefono que twilio genera para que desde aqui envie los mensajes	
+						'from' => $telefono_twilio,
+						//aqui se coloca el mensaje que le llegara al telefono del usuario
+						'body' => $codigo_val//$codigo_val
+
+					)); 
+											
+						echo json_encode($respuestas_suscribir[0]); 
+						//echo "bien";
+				}
+				catch (Services_Twilio_RestException $e){
+						//$respuestas_suscribir[1]['mensaje'] = $e.get_code();
+					  	echo json_encode($respuestas_suscribir[1]);
+				}
+
+					
+			}
+			if ($resultado_sql_registro_cliente_t==false) 
+			{
+								//echo "error al insertar en base de datos";
+				echo json_encode($respuestas_suscribir[1]);
+			}
+
+			//echo "llego ".$caso." ".$numero_suscribir." ".$codigo_val;
+		}
+//ESTA PARTE ES CUANDO SE VALIDA EL CODIGO DE SEGURIDAD INGRESADO POR EL USUARIO
+		if($caso == "validar_t_c")
+		{
+			
+
+			$sql_obtener_id2 = "SELECT cli.id, cli.nombre_cliente,cli.telefono,cli.activo,cli.keyt FROM clientes cli WHERE cli.telefono = '$numero_suscribir1'";
+
+			$resultado_sql_obtener_id2 = pg_query($cone,$sql_obtener_id2);
+
+			$fila2=pg_fetch_assoc($resultado_sql_obtener_id2);
+
+			$id_cliente2 = $fila2['id'];
+
+
+///////////codigo para hacer pruebas
+			$respuestas_pruebas = array(
+					0=>array('mensaje' => 'Codigo SMS enviado a tu telefono (tienes hasta 5 minutos para colocarlo)', 'id' => 'success'),
+					1=>array('mensaje' => $id_cliente2,
+						'id' =>'prueba')
+					);
+			echo json_encode($respuestas_pruebas[1]);
+/////////////////////////////////////////
+
+
+			$sql_repetir_validar_codigo = "SELECT cla.id, cla.clave, cla.fecha_caducidad FROM claves cla WHERE cla.id_cliente = '$id_cliente2' ORDER BY cla.id DESC LIMIT 1";
+
+			$resultado_sql_repetir_validar_codigo=pg_query($cone,$sql_repetir_validar_codigo);
+
+			$fila5=pg_fetch_assoc($resultado_sql_repetir_validar_codigo);
+
+			$codigo_dentro2 = $fila5['clave'];
+			$fecha_caducidad_anterior = $fila5['fecha_caducidad'];
+
+
+/*
+			if($codigo_dentro2 == "111") 
+			{				
+				$respuestas_suscribir = array(
+					0=>array('mensaje' => 'Codigo SMS enviado a tu telefono (tienes hasta 5 minutos para colocarlo)', 'id' => 'success'),
+					1=>array('mensaje' => 'Hubo un problema con la base de datos',
+						'id' =>'error')
+					);
+
+				$codigo_val1 = rand(10001,99999);
+				$codigo_val = $codigo_val1." ";
+
+
+
+				$codigo_ramdom = rand(100001,999999);
+				$fecha_clave = date("Y-m-d");
+				$valor_tem_clave_i = date("Y-m-d H:i:s");
+
+				$fecha_clave =  $valor_tem_clave_i." ";
+				$partes_fecha = explode(" ",$fecha_clave);
+				$fecha_sin_es = $partes_fecha[0].$partes_fecha[1];
+				$fecha_sin_p_a = explode(":",$fecha_sin_es);
+				$fecha_sin_p = $fecha_sin_p_a[0].$fecha_sin_p_a[1].$fecha_sin_p_a[2];
+
+				$fecha_sin_g_a = explode("-",$fecha_sin_p);
+				$fecha_sin_g = $fecha_sin_g_a[0].$fecha_sin_g_a[1].$fecha_sin_g_a[2];
+			    $apikey2 = $fecha_sin_g."-".$codigo_ramdom;
+
+
+			//aqui modifica la tabla clientes
+				$sql_registro_cliente_t ="UPDATE clientes SET keyt ='$apikey2' WHERE id='$id_cliente2'";
+				
+				$resultado_sql_registro_cliente_t=pg_query($cone,$sql_registro_cliente_t);
+//echo $apikey2." ".$id_cliente2."<br>";
+
+			//aqui registra en la tabla claves
+
+				$sql_obtener_id = "SELECT cli.id, cli.nombre_cliente,cli.telefono,cli.activo,cli.keyt FROM clientes cli WHERE cli.telefono = '$numero_suscribir1'";
+
+				$resultado_sql_obtener_id=pg_query($cone,$sql_obtener_id);
+
+				$fila2=pg_fetch_assoc($resultado_sql_obtener_id);
+
+				$id_cliente = $fila2['id'];
+
+
+
+	//aqui se registra la fecha de caducidad, tiene 5 minutos de mas
+				$f_caducidad_t = date("Y-m-d H:i:s");
+
+				$f_caducidad_t2 = strtotime("+1 minute",strtotime($f_caducidad_t));
+
+				$f_caducidad = date("Y-m-d H:i:s",$f_caducidad_t2);
+
+				
+				$sql_registro_clave ="UPDATE claves SET clave ='$codigo_val1', fecha_caducidad = '$f_caducidad' WHERE id_cliente='$id_cliente2' AND fecha_caducidad ='$fecha_caducidad_anterior'";
+				$resultado_sql_registro_clave2=pg_query($cone,$sql_registro_clave);
+
+				if ($resultado_sql_registro_cliente2==true) 
+				{
+				$client1 = new Client($sid1, $token1); 
+					try {
+						// Use the client to do fun stuff like send text messages!
+						$client1->messages->create(
+							//aqui se coloca el numero de telefono alque llegara el codigo de validacion generado por twilio
+							$numero_suscribir, //activa este si quieres que funcione para todos los numeros de telefonos
+							//'+584268210636', //activa este si solo quieres que funcione para el telefono de pablo
+							array(
+							//aqui se coloca el numero de telefono que twilio genera para que desde aqui envie los mensajes	
+							'from' => $telefono_twilio,
+							//aqui se coloca el mensaje que le llegara al telefono del usuario
+							'body' => $codigo_val//$codigo_val
+
+						)); 
+												
+							echo json_encode($respuestas_suscribir[0]); 
+							//echo "bien";
+					}
+					catch (Services_Twilio_RestException $e){
+							//$respuestas_suscribir[1]['mensaje'] = $e.get_code();
+						  	echo json_encode($respuestas_suscribir[1]);
+					}
+			    }
+
+				if ($resultado_sql_registro_cliente2==false) 
+				{
+					//echo "error al insertar en base de datos";
+					echo json_encode($respuestas_suscribir[1]);
+				}
+			}*/
+
+
+
+
+			if($codigo_dentro2 != "111") 
+			{			
+				$sql_obtener_id2 = "SELECT cli.id, cli.nombre_cliente,cli.telefono,cli.activo,cli.keyt FROM clientes cli WHERE cli.telefono = '$numero_suscribir1'";
+
+				$resultado_sql_obtener_id2 = pg_query($cone,$sql_obtener_id2);
+
+				$fila2=pg_fetch_assoc($resultado_sql_obtener_id2);
+
+				$id_cliente2 = $fila2['id'];
+
+
+				$sql_validar_codigo = "SELECT cla.id, cla.clave, cla.fecha_caducidad FROM claves cla WHERE cla.id_cliente = '$id_cliente2'";
+
+				$resultado_sql_validar_codigo=pg_query($cone,$sql_validar_codigo);
+
+				$fila=pg_fetch_assoc($resultado_sql_validar_codigo);
+
+				$codigo_dentro = $fila['clave'];
+				$f_ca = $fila['fecha_caducidad'];
+
+
+				$f_actual = date("Y-m-d H:i:s");
+
+				$fecha_ca = strtotime($f_ca);
+
+				$fecha_actual = strtotime($f_actual);
+
+
+
+				$respuestas_suscribir2 = array(
+						0=>array('mensaje' => 'validacion de telefono correcta', 'id' => 'success'),
+						1=>array('mensaje' => 'Codigo de Seguridad Incorrecto',
+							'id' =>'error_c'),
+						2=>array('mensaje' => 'Tiempo expirado',
+							'id' =>'error_t'),
+						);
+
+	//echo "llego ".$codigo_dentro." ".$clave_suscribir;
+				if($fecha_actual > $fecha_ca)
+				{
+					//$ind_val_t_c == 1;
+					//echo $id_cliente2." ".$f_ca;
+					$sql_cambio_clave ="UPDATE claves SET clave ='111' WHERE id_cliente='$id_cliente2' AND fecha_caducidad = '$f_ca'";
+					$resultado_sql_registro_cliente=pg_query($cone,$sql_cambio_clave);
+
+
+
+					echo json_encode($respuestas_suscribir2[2]);
+				}			
+				if($codigo_dentro == $clave_suscribir && $fecha_actual <= $fecha_ca)
+				{
+					echo json_encode($respuestas_suscribir2[0]);
+					//$sql ="UPDATE clientes SET imagen ='$ruta' WHERE id='$id_cli'";
+				}
+				if($codigo_dentro != $clave_suscribir)
+				{
+					echo json_encode($respuestas_suscribir2[1]);
+				}
+
+
+			}
+
+
+
+
+
+
+
+////debes comentar desde aqui
+			if($codigo_dentro2 == "111") 
+			{				
+				$respuestas_suscribir = array(
+					0=>array('mensaje' => 'Codigo SMS enviado a tu telefono (tienes hasta 5 minutos para colocarlo)', 'id' => 'success'),
+					1=>array('mensaje' => 'Hubo un problema con la base de datos',
+						'id' =>'error')
+					);
+
+				$codigo_val1 = rand(10001,99999);
+				$codigo_val = $codigo_val1." ";
+
+
+
+				$codigo_ramdom = rand(100001,999999);
+				$fecha_clave = date("Y-m-d");
+				$valor_tem_clave_i = date("Y-m-d H:i:s");
+
+				$fecha_clave =  $valor_tem_clave_i." ";
+				$partes_fecha = explode(" ",$fecha_clave);
+				$fecha_sin_es = $partes_fecha[0].$partes_fecha[1];
+				$fecha_sin_p_a = explode(":",$fecha_sin_es);
+				$fecha_sin_p = $fecha_sin_p_a[0].$fecha_sin_p_a[1].$fecha_sin_p_a[2];
+
+				$fecha_sin_g_a = explode("-",$fecha_sin_p);
+				$fecha_sin_g = $fecha_sin_g_a[0].$fecha_sin_g_a[1].$fecha_sin_g_a[2];
+			    $apikey2 = $fecha_sin_g."-".$codigo_ramdom;
+
+
+			//aqui modifica la tabla clientes
+				$sql_registro_cliente_t ="UPDATE clientes SET keyt ='$apikey2' WHERE id='$id_cliente2'";
+				
+				$resultado_sql_registro_cliente_t=pg_query($cone,$sql_registro_cliente_t);
+//echo $apikey2." ".$id_cliente2."<br>";
+
+			//aqui registra en la tabla claves
+
+				$sql_obtener_id = "SELECT cli.id, cli.nombre_cliente,cli.telefono,cli.activo,cli.keyt FROM clientes cli WHERE cli.telefono = '$numero_suscribir1'";
+
+				$resultado_sql_obtener_id=pg_query($cone,$sql_obtener_id);
+
+				$fila2=pg_fetch_assoc($resultado_sql_obtener_id);
+
+				$id_cliente = $fila2['id'];
+
+
+
+	//aqui se registra la fecha de caducidad, tiene 5 minutos de mas
+				$f_caducidad_t = date("Y-m-d H:i:s");
+
+				$f_caducidad_t2 = strtotime("+1 minute",strtotime($f_caducidad_t));
+
+				$f_caducidad = date("Y-m-d H:i:s",$f_caducidad_t2);
+
+				
+				$sql_registro_clave ="UPDATE claves SET clave ='$codigo_val1', fecha_caducidad = '$f_caducidad' WHERE id_cliente='$id_cliente2' AND fecha_caducidad ='$fecha_caducidad_anterior'";
+				$resultado_sql_registro_clave2=pg_query($cone,$sql_registro_clave);
+
+				if ($resultado_sql_registro_cliente2==true) 
+				{
+				$client1 = new Client($sid1, $token1); 
+					try {
+						// Use the client to do fun stuff like send text messages!
+						$client1->messages->create(
+							//aqui se coloca el numero de telefono alque llegara el codigo de validacion generado por twilio
+							$numero_suscribir, //activa este si quieres que funcione para todos los numeros de telefonos
+							//'+584268210636', //activa este si solo quieres que funcione para el telefono de pablo
+							array(
+							//aqui se coloca el numero de telefono que twilio genera para que desde aqui envie los mensajes	
+							'from' => $telefono_twilio,
+							//aqui se coloca el mensaje que le llegara al telefono del usuario
+							'body' => $codigo_val//$codigo_val
+
+						)); 
+												
+							echo json_encode($respuestas_suscribir[0]); 
+							//echo "bien";
+					}
+					catch (Services_Twilio_RestException $e){
+							//$respuestas_suscribir[1]['mensaje'] = $e.get_code();
+						  	echo json_encode($respuestas_suscribir[1]);
+					}
+			    }
+
+				if ($resultado_sql_registro_cliente2==false) 
+				{
+					//echo "error al insertar en base de datos";
+					echo json_encode($respuestas_suscribir[1]);
+				}
+			}
+
+
+
+
+
+
+			//echo "llego ".$codigo_dentro." ".$status_usuario;
+		}
+//ESTA ES LA PARTE DE REGISTRAR COMPLETAMENTE AL USUARIO
+		if($caso == "registrar_u")
+		{
+			$respuestas_suscribir4 = array(
+				0=>array('mensaje' => 'El Formato de la imagen no es valido, solo estan permitidos los formatos: JPG, JPEG y PNG', 'id' => 'e_imagen'),
+			);
+
+
+			$numero_pin = $_POST['numero_pin'];
+			$correo = $_POST['correo'];
+			$f_nacimiento = $_POST['f_nacimiento'];
+			$sexo = $_POST['sexo'];
+
+			$imagen = $_FILES['foto'];
+		//echo $imagen['type']." ".$imagen['tmp_name'];
+			if($imagen['type']=="")
+			{
+				
+				$sql_registro_cliente ="UPDATE clientes SET activo ='1', pin ='$numero_pin', correo ='$correo', fecha_nacimiento = '$f_nacimiento', sexo = '$sexo' WHERE telefono='$numero_suscribir1'";
+				$resultado_sql_registro_cliente=pg_query($cone,$sql_registro_cliente);
+
+				$respuestas_suscribir3 = array(
+						0=>array('mensaje' => 'Usuario registrado correctamente', 'id' => 'success'),
+						1=>array('mensaje' => 'Hubo un problema al registrar usuario',
+							'id' =>'error')
+						);
+				
+				if($resultado_sql_registro_cliente==true) 
+				{			
+					echo json_encode($respuestas_suscribir3[0]);
+				}
+
+
+				if($resultado_sql_registro_cliente==false) 
+				{			
+					echo json_encode($respuestas_suscribir3[1]);
+				}
+
+			}
+			if($imagen['type']!="")
+			{
+				//echo "si hay imagen";
+				//aqui se obtiene el id del cliente utilizado el numero de telefono
+
+				$sql_id_cliente = "SELECT cli.id, cli.telefono, cli.imagen FROM clientes cli WHERE cli.telefono = '$numero_suscribir1'";
+				
+				$resultado_sql_id_cliente=pg_query($cone,$sql_id_cliente);
+
+				$fila=pg_fetch_assoc($resultado_sql_id_cliente);
+
+				$id_cli = $fila['id'];
+
+
+				$nuevo_nombre = $id_cli."-2019-03-05-03-04-56".".2";	
+
+		//aqui valida las extensiones y hace el update
+				  if($imagen['type'] == "image/jpg" OR $imagen['type'] == "image/jpeg" OR $imagen['type'] == "image/png")
+				  {
+				    if ($imagen['type'] == "image/jpg") 
+				    {       
+				      $ruta = "../img/imagen_usuario/".$nuevo_nombre.".jpg";
+				      $sql ="UPDATE clientes SET imagen ='$ruta' WHERE id='$id_cli'";
+
+				      if ($resultado=pg_query($cone,$sql))
+				      {
+				      	$respuestas_suscribir[4]['ima'] = $ruta;
+				        move_uploaded_file($imagen["tmp_name"], $ruta);
+				        //echo "se cargo";
+				        //echo json_encode($respuestas_suscribir[4]);
+				      }
+				      //else{
+				        //echo "Nose cargo";
+				        //echo json_encode($respuestas_suscribir[5]);
+				      //}
+
+
+						$sql_registro_cliente ="UPDATE clientes SET activo ='1', pin ='$numero_pin', correo ='$correo', fecha_nacimiento = '$f_nacimiento', sexo = '$sexo' WHERE telefono='$numero_suscribir1'";
+						$resultado_sql_registro_cliente=pg_query($cone,$sql_registro_cliente);
+
+						$respuestas_suscribir3 = array(
+								0=>array('mensaje' => 'Usuario registrado correctamente', 'id' => 'success'),
+								1=>array('mensaje' => 'Hubo un problema al registrar usuario',
+									'id' =>'error')
+								);
+						
+						if($resultado_sql_registro_cliente==true) 
+						{			
+							echo json_encode($respuestas_suscribir3[0]);
+						}
+
+
+						if($resultado_sql_registro_cliente==false) 
+						{			
+							echo json_encode($respuestas_suscribir3[1]);
+						}
+				      }
+				    
+
+
+					if ($imagen['type'] == "image/jpeg") 
+					{        
+				      $ruta = "../img/imagen_usuario/".$nuevo_nombre.".jpeg";
+
+				      $sql ="UPDATE clientes SET imagen ='$ruta' WHERE id='$id_cli'";
+
+				      if ($resultado=pg_query($cone,$sql))
+				      {
+				      	$respuestas_suscribir[4]['ima'] = $ruta;
+				        move_uploaded_file($imagen["tmp_name"], $ruta);
+				        //echo "se cargo";
+				       // echo json_encode($respuestas_suscribir[4]);
+				      }
+				      //else{
+				        //echo "Nose cargo";
+				        //echo json_encode($respuestas_suscribir[5]);
+				      //}
+				    
+
+						$sql_registro_cliente ="UPDATE clientes SET activo ='1', pin ='$numero_pin', correo ='$correo', fecha_nacimiento = '$f_nacimiento', sexo = '$sexo' WHERE telefono='$numero_suscribir1'";
+						$resultado_sql_registro_cliente=pg_query($cone,$sql_registro_cliente);
+
+						$respuestas_suscribir3 = array(
+								0=>array('mensaje' => 'Usuario registrado correctamente', 'id' => 'success'),
+								1=>array('mensaje' => 'Hubo un problema al registrar usuario',
+									'id' =>'error')
+								);
+						
+						if($resultado_sql_registro_cliente==true) 
+						{			
+							echo json_encode($respuestas_suscribir3[0]);
+						}
+
+
+						if($resultado_sql_registro_cliente==false) 
+						{			
+							echo json_encode($respuestas_suscribir3[1]);
+						}
+
+				    }
+
+					if ($imagen['type'] == "image/png") 
+					{       
+					      $ruta = "../img/imagen_usuario/".$nuevo_nombre.".png";
+					      $sql ="UPDATE clientes SET imagen ='$ruta' WHERE id='$id_cli'";
+
+					      if ($resultado=pg_query($cone,$sql))
+					      {
+					      	$respuestas_suscribir[4]['ima'] = $ruta;
+
+					        move_uploaded_file($imagen["tmp_name"], $ruta);
+					        //echo "se cargo";
+					        //echo json_encode($respuestas_suscribir[4]);
+					      }
+					      //else{
+					        //echo "Nose cargo";
+					        //echo json_encode($respuestas_suscribir[5]);
+					      //}
+
+						$sql_registro_cliente ="UPDATE clientes SET activo ='1', pin ='$numero_pin', correo ='$correo', fecha_nacimiento = '$f_nacimiento', sexo = '$sexo' WHERE telefono='$numero_suscribir1'";
+						$resultado_sql_registro_cliente=pg_query($cone,$sql_registro_cliente);
+
+						$respuestas_suscribir3 = array(
+								0=>array('mensaje' => 'Usuario registrado correctamente', 'id' => 'success'),
+								1=>array('mensaje' => 'Hubo un problema al registrar usuario',
+									'id' =>'error')
+								);
+						
+						if($resultado_sql_registro_cliente==true) 
+						{			
+							echo json_encode($respuestas_suscribir3[0]);
+						}
+
+
+						if($resultado_sql_registro_cliente==false) 
+						{			
+							echo json_encode($respuestas_suscribir3[1]);
+						}
+					      
+					 }
+
+				}else{
+					echo json_encode($respuestas_suscribir4[0]);
+				}
+
+
+			}
+			//echo $numero_suscribir1." ".$numero_pin." ".$correo." ".$f_nacimiento." ".$sexo;
+			
+/*
+			$sql_registro_cliente ="UPDATE clientes SET activo ='1', pin ='$numero_pin', correo ='$correo', fecha_nacimiento = '$f_nacimiento', sexo = '$sexo' WHERE telefono='$numero_suscribir1'";
+			$resultado_sql_registro_cliente=pg_query($cone,$sql_registro_cliente);
+
+			$respuestas_suscribir3 = array(
+					0=>array('mensaje' => 'Usuario registrado correctamente', 'id' => 'success'),
+					1=>array('mensaje' => 'Hubo un problema al registrar usuario',
+						'id' =>'error')
+					);
+			
+			if($resultado_sql_registro_cliente==true) 
+			{			
+				echo json_encode($respuestas_suscribir3[0]);
+			}
+
+
+			if($resultado_sql_registro_cliente==false) 
+			{			
+				echo json_encode($respuestas_suscribir3[1]);
+			}
+
+			*/
+		}
 		//echo "numero suscribir: ".$numero_suscribir." clave suscribir: ".$clave_suscribir." fecha entrada: ".$fecha_entrada;
 
 
+/*
 		$sql_validar_clave = "SELECT cla.id, cla.clave, cla.fecha_caducidad, cla.id_cliente FROM claves cla WHERE cla.clave = '$clave_suscribir'";
 
 		$resultado_sql_validar_clave=pg_query($cone,$sql_validar_clave);
@@ -147,10 +774,7 @@ if(isset($_POST['nombre_funcion']))
 	    echo json_encode($respuestas_suscribir[6]);
     }
 
-		 
-
-
-		//$imagen = $_FILES['imagen'];
+		 */
 /*
 		if()
 		{ 
@@ -220,6 +844,7 @@ if(isset($_POST['nombre_funcion']))
 				$numero_suscribir = "";
 				$clave_suscribir = ""; 
 			}	 */
+
 		}
 	} 
 

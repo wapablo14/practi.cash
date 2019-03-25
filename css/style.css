@@ -40,6 +40,19 @@
 		background-color: #0174DF;
 		color: white;
 	}
+/*crear usuario*/
+	button#boton_crear_usuario {
+		width: 100%;
+		height: 50px;
+		font-size: 17px;
+		margin: 10px auto;
+		border: 25px ;
+		border-radius: 25px;
+		background-color: #0174DF;
+		color: white;
+	}
+
+
 	.error{
 		color: white;
 	}
