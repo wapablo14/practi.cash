@@ -512,6 +512,314 @@ $(document).ready(function(){
      
     });
 
+////////////////////////////////aqui finaliza la parte del pago
+
+
+////////////////////////aqui empieza la parte de generar el codigo de validacion del numero de telefono validar.html
+	$("#enviar_cod").on("click", function(){
+		//alert("ffffff");
+		
+		var numero_tele = $("#tel").val();
+
+        var codedial = $(".selected-flag").attr('title');
+        var codigo_i = codedial.split('+');
+        var codigo = codigo_i[1];
+
+		var validar_numero_t= validar_numero_t(numero_tele);
+
+
+        if (validar_numero_t==false) 
+        {
+            swal("Error","El campo del Numero de Telefono debe ser numerico, y debe contener minimo 5 digitos","error"); 
+        }       
+
+
+        if (validar_numero_t==true) 
+        {
+        	//numero_tele = "+"+codigo+numero_tele;
+        	numero_tele = codigo+numero_tele;
+			var dataString10="nombre_funcion="+"a_suscribir"+"&numero="+numero_tele+"&clave="+"23233"+"&fecha_entrada="+"23-23-3"+"&caso="+"generar_codigo_val";
+			
+			//alert(numero_tele);
+
+        	$.ajax({
+			type: "POST",
+			url:"../api/api.php",
+			data: dataString10,
+			crossDomain: true,
+			cache: false,
+			success: function(data){
+				//console.log(data);
+			//	var datos_num_t =$('#tarjeta');
+				var datosString10 = $.parseJSON(data);
+				console.log(datosString10);
+				//$.each(datosString10,function(i,field){
+					//var men=field.mensaje;
+					var men = datosString10.mensaje;
+					var id_datos = datosString10.id;
+					//alert(id_datos);
+				if (id_datos == 'success')
+				{
+					//$("#numero_tele2").attr('value',numero_tele);
+					$("#enviar_cod").fadeOut(100);
+
+					$("#titulo_cod").text(men);
+					$("#codigo_se").fadeIn(1000);
+					$("#boton_val").fadeIn(1500);
+	            	
+				}
+				if (id_datos == 'error')
+				{
+					 swal("Error","Hubo un error en la base de datos o al validar el telfono","error");
+				}
+				//var num_tarjeta=field.stripe_code;
+				//datos_num_t.val(num_tarjeta);
+		
+			//});
+			}
+		})
+        }
+
+        
+        //alert(numero_tele);
+	    
+	    function validar_numero_t(num){
+
+	     var filtro = /^[0-9]{5,25}$/;
+	     var result = filtro.test(num);
+	    
+	     return result;
+	     }
+	});	
+////////////////////////aqui finaliza la parte de generar el codigo de validacion del numero de telefono
+	
+
+
+/////////////////////////////aqui empieza la parte de validacion del numero de telefono
+//es decir validar.html
+
+	var numero_tele_temp = 0;
+	var clave_temp = 0;
+
+
+      $("#boton_val").on("click", function(){
+    
+        var numero_tele = $("#tel").val();
+
+        var codedial = $(".selected-flag").attr('title');
+        var codigo_i = codedial.split('+');
+        var codigo = codigo_i[1];
+        var codigo_val= $("#cod_val").val();
+        numero_tele = codigo+numero_tele;
+
+        //alert(numero_tele+" "+codigo+" "+codigo_val);
+
+        var validar_numero= validar_numero(numero_tele);
+      
+	    function validar_numero(num){
+
+	     var filtro = /^[0-9+]{5,15}$/;
+	     var result = filtro.test(num);
+	    
+	     return result;
+	     }        
+
+//EN CASO DE CAMPOS EN BLANCO
+        if (validar_numero=="" || codigo_val =="") 
+        {
+            swal("Error","Debes llenar todos los campos","error"); 
+        }       
+
+
+//EN CASO DE ALGUN CAMPO ESCRITO DE FORMA ERRONEA
+
+        if(validar_numero==false) 
+        {
+            swal("Error","El Numero de telefono debe tener min 5 digitos y el Codigo de Seguridad debe ser de 5 digitos","error"); 
+        }
+
+
+            if(validar_numero==true)
+            {
+            	//alert("estan biekljljlkn");
+			var dataString11="nombre_funcion="+"a_suscribir"+"&numero="+numero_tele+"&clave="+codigo_val+"&fecha_entrada="+"23-23-3"+"&caso="+"validar_t_c";
+
+        	$.ajax({
+			type: "POST",
+			url:"../api/api.php",
+			data: dataString11,
+			crossDomain: true,
+			cache: false,
+			success: function(data){
+				console.log(data);
+			//	var datos_num_t =$('#tarjeta');
+				var datosString11 = $.parseJSON(data);
+				console.log(datosString11);
+				//$.each(datosString10,function(i,field){
+					//var men=field.mensaje;
+					var men = datosString11.mensaje;
+					var id_datos = datosString11.id;
+					//alert(id_datos);
+				if (id_datos == 'success')
+				{
+					var numero_tele2 = '+'+numero_tele;
+	            	//$("#numero_tele2").val(numero_tele);
+					$("#numero_tele2").attr('value',numero_tele);
+					$("#numero_tele3").attr('value',numero_tele2);
+					$(".formulario_val").fadeOut(100);
+	            	$(".formulario_re").fadeIn(2000);
+
+				}
+				if (id_datos == 'error_c')
+				{
+					 swal("Error","El Codigo de Seguridad No es el Correcto","error");
+				}
+				if (id_datos == 'error_t')
+				{
+					alert("El tiempo para ingresar codigo de seguridad Ha expirado");
+					window.location.href = "../Paginas/validar_telefono.html";
+				}				
+			}
+		})
+
+
+//				window.location.href = "registro_usuario.html";
+        		
+            	/*
+            var dataString6="nombre_funcion="+"a_pago"+"&telefono="+numero_tele+"&pin="+pin+"&valor_de_pago="+valor_de_pago+"&telefono_recibe="+telefono_recibe+"&concepto="+concepto;
+           	
+	            $.ajax({
+	                type: "POST",
+	                url:"../api/api.php",
+	                data: dataString6,
+	                crossDomain: true,
+	                cache: false,
+
+	                success: function(data){
+
+
+	                }
+	            });*/
+        	}
+
+    });
+          
+    
+   
+//esta parte es para el marcaje unico de los checkbox
+
+$("input:checkbox").on('click', function() {
+  // in the handler, 'this' refers to the box clicked on
+  var $box = $(this);
+  if ($box.is(":checked")) {
+    var group = "input:checkbox[name='" + $box.attr("name") + "']";
+    $(group).prop("checked", false);
+    $box.prop("checked", true);
+  } else {
+    $box.prop("checked", false);
+  }
+});
+
+
+////////////////////////// aqui termina la parte de la validacion de telefonp
+
+
+/////////////////////// aqui empieza la parte del registro del usuario registro_usuario.html
+
+		$("#registrarUsuario").submit(registrar_usuario)
+
+		function registrar_usuario(event){
+			event.preventDefault();
+			//	alert("sssss");		
+			var datos = new FormData($("#registrarUsuario")[0]);
+
+			var numero_pin  = datos.get("numero_pin");
+			var correo  = datos.get("correo");
+			var f_nacimiento  = datos.get("f_nacimiento");
+			var sexo  = datos.get("sexo");			
+
+	        var validar_numero_pin = validar_numero(numero_pin);
+	        var validar_correo = validar_correo(correo);
+	        var validar_fecha = validar_fecha(f_nacimiento);
+
+		  //alert(validar_numero_pin+" "+validar_correo+" "+validar_fecha+" "+sexo)
+		    function validar_numero(num){
+
+		     var filtro = /^[0-9a-zA-Z]{5}$/;
+		     var result = filtro.test(num);		    
+		     return result;
+		     } 
+
+     	    function validar_correo(correo_em){
+
+		     var filtro = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
+		     var result = filtro.test(correo_em);
+		    
+		     return result;
+		     }
+		      
+
+     	    function validar_fecha(fe){
+		     var filtro = /^[0-9]{2}[\-]{1}[0-9]{2}[\-]{1}[0-9]{4}$/;
+
+		     var arreglo_fecha = fe.split('-');
+        	 var dia = arreglo_fecha[0];
+        	 var mes = arreglo_fecha[1];
+
+        	 if(dia>31 || mes>12) 
+        	 {
+        	 	var result = false;
+        	 }else{
+        	 	var result = filtro.test(fe);
+        	 }
+		    
+		     return result;
+		     }
+
+
+		     if(validar_numero_pin == false || validar_correo == false || validar_fecha == false || sexo==null) 
+		     {
+		     	swal("Error", "El codigo PIN debe ser solo de cinco caracteres y solo puedes usar numeros o letras;  \nEl correo debe tener el formato xxxxx@xxxx.xxx; \nLa Fecha de Nacimiento de ser en formato dd-mm-aaaa; \nDebes rellenar los campos Pin, Correo, Fecha de Nacimiento y Sexo","error");
+		     }
+
+
+		    if(validar_numero_pin == true && validar_correo == true && validar_fecha == true &&  sexo!=null) 
+			{			
+				$.ajax({
+					url:'../api/api.php',
+					type: 'POST',
+					data: datos,
+					contentType: false, //para no permitir envio de datos get
+					processData: false,//para no convertir los datos en forma de texto
+					cache: false,
+					success: function(data){
+						//console.log(data);
+						var datosString12 = $.parseJSON(data);
+						console.log(datosString12);
+						if(datosString12.id == 'success')
+						{
+							alert("Usuario Registrado Correctamente");
+							window.location.href = "../index.html";
+						}
+						if(datosString12.id == 'error')
+						{
+							alert("Hubo un problema al registrar el usuario");
+							window.location.href = "../index.html";
+						}
+
+						if(datosString12.id == 'e_imagen')
+						{
+							swal("Error", datosString12.mensaje,"error"); 
+						}						
+					}
+				}); 
+			}
+		}
+//////////////////////////// aqui termina la parte de registro de usuario
+
+
+
+
 ////////////////////en esta parte se redirecciona a usuario.html al pulsar boton cerrar
 	 $("#cer_modal").on("click",function(){
 		window.location.href = "usuario.html";

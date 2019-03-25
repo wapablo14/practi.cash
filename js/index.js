@@ -54,7 +54,10 @@ $(document).ready(function(){
 						//Ajax envio inputs.
 						var numero=$("#numero").val();
 						var dataString="numero="+numero+"&insert=";
-						$.ajax({
+					
+						window.location.href = "Paginas/validar_telefono.html";
+
+					/*	$.ajax({
 							type: "POST",
 							url:"api/cal_saldo.php",
 							data: dataString,
@@ -76,7 +79,7 @@ $(document).ready(function(){
 								alert("Registro ya existe.");
 							}
 							}
-						});              
+						});      */        
 					}
 					}
 				});
@@ -103,4 +106,14 @@ $(document).ready(function(){
 			}	
 		});	
 	});
+
+
+//ESTA ES LA PARTE DE CREAR USUARIO EN EL INDEX.HTML 
+    $("#boton_crear_usuario").on("click",function(){
+
+    	//alert("sasdas");
+    	window.location.href = "Paginas/validar_telefono.html";
+    	return false;
+    });
+
 });

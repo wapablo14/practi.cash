@@ -5,11 +5,36 @@ CREATE TABLE clientes
   id bigserial ,
   nombre_cliente text NOT NULL default '',
   --apellido_cliente character varying(10) NOT NULL default '',
-  telefono integer NOT NULL default 0 ,
+  telefono text default '' ,
   activo boolean default '0' ,
   keyt text default '',
+  imagen text default '',
+  pin text default '' ,
+  correo text default '',
+  fecha_nacimiento text default '',
+  sexo text default '',
   primary key(id)
 );
+
+UPDATE clientes SET activo ='0', sexo = 'masculino' WHERE telefono=5804268210636
+
+INSERT INTO clientes(nombre_cliente,telefono,activo,keyt,imagen,pin) VALUES('nombre_temporal','+582323232','0','23343','no_imagen',11111)
+
+SELECT cli.nombre_cliente,cli.telefono,cli.activo,cli.keyt FROM clientes cli WHERE cli.telefono = '5804268210636'
+
+UPDATE clientes SET imagen = 'si' WHERE id=3
+
+SELECT cli.id, cli.telefono, cli.nombre_cliente, cli.imagen FROM clientes cli WHERE cli.telefono = '10001'
+
+insert into clientes(nombre_cliente,telefono,activo,keyt,imagen) values('Alfonzo Bruno',10001,'1','key1','no_imagen');
+insert into clientes(nombre_cliente,telefono,activo,keyt,imagen) values('Julio Camacho',10002,'1','key2','no_imagen');
+insert into clientes(nombre_cliente,telefono,activo,keyt,imagen) values('Elias Rodriguez',10003,'1','key3','no_imagen');
+
+SELECT cli.id, cli.telefono FROM clientes cli WHERE cli.telefono = '10078872'
+
+SELECT count(c.id) AS cant_total FROM clientes c WHERE c.telefono = '10002' 
+
+
 
 insert into clientes(nombre_cliente,telefono,activo,keyt) values('luis',123213,'1','asdsd');
 insert into clientes(nombre_cliente,telefono,activo,keyt) values('pedro',4323,'1','apala');
@@ -31,9 +56,12 @@ CREATE TABLE tarjetas_stripe
   primary key(id)
 );
 
-insert into tarjetas_stripe(id_cliente,stripe_code,tipo,ultimos_digitos,activo) values(2,'r4323','debito',56,'1');
-insert into tarjetas_stripe(id_cliente,stripe_code,tipo,ultimos_digitos,activo) values(1,'r6765','credito',34,'1');
-insert into tarjetas_stripe(id_cliente,stripe_code,tipo,ultimos_digitos,activo) values(3,'r8976','debito',67,'1');
+insert into tarjetas_stripe(id_cliente,stripe_code,tipo,ultimos_digitos,activo) values(1,'4323777','debito',777,'1');
+insert into tarjetas_stripe(id_cliente,stripe_code,tipo,ultimos_digitos,activo) values(2,'6765888','credito',888,'1');
+insert into tarjetas_stripe(id_cliente,stripe_code,tipo,ultimos_digitos,activo) values(3,'89769999','debito',999,'1');
+
+
+
 
 insert into tarjetas_stripe(id_cliente,stripe_code,tipo,ultimos_digitos,activo) values(1,'o3444','debito',45,'1');
 insert into tarjetas_stripe(id_cliente,stripe_code,tipo,ultimos_digitos,activo) values(1,'d3433','credito',69,'1');
@@ -62,7 +90,27 @@ CREATE TABLE transacciones
   primary key(id)
 );
 
-SELECT sum(t.valor) AS saldo_total FROM transacciones t WHERE t.id_cliente = 2 
+UPDATE transacciones SET valor = 9000 WHERE valor=-3
+
+INSERT INTO transacciones(fecha,id_cliente,valor,descripcion,observacion,id_tarjeta, stripe_id,transaccion_id) VALUES('22-02-2019',1,1000,'primer deposito','bien',1,'1','1') ;
+insert into transacciones(fecha,id_cliente,valor,descripcion,observacion,id_tarjeta,stripe_id,transaccion_id) values('03-02-2019',2,1000,'primer deposito','estuvo bien',2,'1','1');
+insert into transacciones(fecha,id_cliente,valor,descripcion,observacion,id_tarjeta,stripe_id,transaccion_id) values('06-02-2019',3,1000,'primer deposito','estuvo bien',3,'1','1');
+
+
+------------------
+SELECT t.id, t.fecha, t.descripcion, t.valor, t.id_cliente, t.observacion, c.nombre_cliente AS saldo FROM transacciones t INNER JOIN clientes c ON t.id_cliente = c.id WHERE t.id_cliente = 5 ORDER BY t.id DESC limit 10
+-------
+SELECT c.id, t.fecha, c.nombre_cliente, t.descripcion FROM clientes c INNER JOIN transacciones t ON c.id = t.id_cliente WHERE t.id_cliente =6 AND t.fecha BETWEEN '2019-02-28' AND '2019-09-01';
+---sub consulta
+SELECT sum(valor) AS saldo_total FROM (SELECT tr.id_cliente, tr.descripcion, tr.valor FROM transacciones tr WHERE tr.id_cliente =6 ORDER BY tr.id DESC 
+) AS sub_tran  WHERE id_cliente = 6 AND valor >0;
+
+
+
+SELECT t.id, t.fecha, t.descripcion FROM transacciones t WHERE t.id_cliente ='1' AND t.fecha BETWEEN '2019-03-01' AND '2019-03-04';
+
+
+SELECT sum(t.valor) AS saldo_total FROM transacciones t WHERE t.id_cliente = 6
 
 SELECT t.id, t.fecha, t.descripcion, t.valor, t.id_cliente AS saldo FROM transacciones t WHERE t.id_cliente = 1 ORDER BY t.id limit 10.
 
@@ -105,10 +153,15 @@ CREATE TABLE claves
 (
   id bigserial,
   clave integer NOT NULL default 0,
-  fecha_caducidad date NOT NULL,
+  --fecha_caducidad date NOT NULL,
+  fecha_caducidad TIMESTAMP,
   id_cliente bigint NOT NULL default 0,
   primary key(id)
 );
 
 insert into claves(clave,fecha_caducidad,id_cliente) values(4567,'02-08-2019',2);
+SELECT count(cli.id) as cantidad FROM clientes cli WHERE cli.telefono = '11111'
+SELECT cla.id, cla.clave, cla.fecha_caducidad FROM claves cla WHERE cla.id_cliente = '1' ORDER BY cla.id DESC LIMIT 1
 
+UPDATE claves SET clave ='111' WHERE id_cliente='1' AND fecha_caducidad = $
+UPDATE clientes SET keyt ='21212-121212' WHERE id='1'
