@@ -48,7 +48,7 @@ $(document).ready(function(){
 						//////////						
 						window.location.href = "Paginas/usuario.html";
 					}
-					else if(data == "error"){
+				/*	else if(data == "error"){
 						alert('No registrado.');
 						alert('Registro.');
 						//Ajax envio inputs.
@@ -56,7 +56,7 @@ $(document).ready(function(){
 						var dataString="numero="+numero+"&insert=";
 					
 						window.location.href = "Paginas/validar_telefono.html";
-
+*/
 					/*	$.ajax({
 							type: "POST",
 							url:"api/cal_saldo.php",
@@ -80,7 +80,7 @@ $(document).ready(function(){
 							}
 							}
 						});      */        
-					}
+					/*}*/
 					}
 				});
 				}

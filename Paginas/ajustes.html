@@ -71,7 +71,7 @@
 				<li><a href="transferencia.html"><i class="icono izquierda fas fa-exchange-alt"></i>Transacciones<i class="icono derecha fas fa-angle-right"></i></a></li>
 				<li><a href="ajustes.html">Perfil<i class="icono derecha fas fa-angle-right"></i></a></li>
 				<li><a href="#" id="botonMapa">Mapa ejemplo<i class="icono derecha fas fa-angle-right"></i></a></li>
-				<li><a href="#">Cerrar Sesion<i class="icono derecha fas fa-angle-right"></i></a></li>
+				<li><a href="#" id="cerrar_se">Cerrar Sesion<i class="icono derecha fas fa-angle-right"></i></a></li>
 			</ul>
 		</div>
 	</div>
@@ -99,13 +99,14 @@
 			
 			</div>
 			<br><br>
+			<!--
             <form id="formulario">   
 				<input id="numero" class="form-control"  type="text" placeholder="Nombre" readonly="true">
 				</br>
-				<input id="name" class="form-control" name="name" type="text" placeholder="Nombre">
+				<input id="name" class="form-control" name="name" type="text" placeholder="Nombre">  -->
 			<!--	<br>   SE HA RETIRADO APELLIDO DEL FORMULARIO
 				<input id="fullname" class="form-control" name="fullname"  type="text" placeholder="Apellido"> -->
-				<br>
+			<!--	<br>
 				<div id="wrapper">
 				<div class="form-group has-feedback">
 					<input type="password" class="form-control" id="password" placeholder="Contraseña">
@@ -119,6 +120,68 @@
 				<br> 
 				<button type="submit" class="form-control" id="btnActualizar" >Actualizar</button> 
 			</form>
+				-->
+
+
+<form enctype="multipart/form-data" id="actualizarUsuario">
+
+						<input type="hidden" name="nombre_funcion" value="a_suscribir" id="nombre_funcion">
+						
+						<input type="hidden" name="clave" value="99999" id="clave_r_temp">
+
+						<input type="hidden" name="fecha_entrada" value="prueba" id="fecha_entrada">
+
+						<input type="hidden" name="numero" value="" id="numero_tele2">
+
+						<input type="hidden" name="caso" value="actualizar_u" id="caso_suscribir">
+
+						<div class="form-group">
+							<label for="numero_tele3" id="titulo_nu2">Numero de Telefono:</label>
+
+							<input type="text" class="form-control" id="numero_tele3" value="" name="numero2"  disabled></br>
+						</div>
+
+						<div class="form-group">
+							<label for="nombre" id="titulo_nombre">Nombre y Apellido:</label>
+
+							<input type="text" class="form-control" id="nombre"  name="nombre"></br>
+						</div>
+
+
+						<div class="form-group">
+							<label for="numero_pin" id="titulo_pin">PIN secreto de pagos y Transacciones:</label>
+
+							<input type="text" class="form-control" id="numero_pin"  name="numero_pin"></br>
+						</div>
+
+
+						<div class="form-group">
+							<label for="correo" id="ti_correo" >Correo:</label>
+
+							<input type="text" class="form-control" id="correo" name="correo" ></br>
+						</div>
+
+
+						<div class="form-group">
+							<label for="f_nacimento" id="ti_f_nacimiento" >Fecha de Nacimiento (dd-mm-aaaa):</label>
+
+							<input type="text" class="form-control" id="f_nacimiento" name="f_nacimiento" ></br>
+						</div>
+
+
+						<div class="form-group">
+							<label id="ti_sexo" >Sexo:</label>
+							<div id="capa_radios">
+
+								<input type="checkbox" name="sexo" id="sex_fem" value="femenino"> Femenino <br>
+
+								<input type="checkbox" name="sexo" id="sex_mas" value="masculino"> Masculino <br>
+							</div>
+						</div>	
+
+						<button type="submit" id="boton_actualizar_usuario" class="btn btn-primary">Actualizar Usuario</button>
+				</form>
+
 			</div>
 			<div class="col-xs-1">
 			</div>
@@ -152,10 +215,13 @@
 							Haz click en Seleccionar Imagen:
 							
 							<input type="hidden" name="numero" value="" id="numero_a">
-							<input type="hidden" name="nombre_funcion" value="" id="nombre_funcion">
+							
+							<input type="hidden" name="nombre_funcion" value="a_suscribir" id="nombre_funcion">
+
 							<input type="hidden" name="clave" value="" id="clave_a">
 							<input type="hidden" name="fecha_entrada" value="" id="fecha_a">
 
+							<input type="hidden" name="caso" value="cargar_foto" id="caso">
 							<br><br>
 							<input type="file" name="imagen" id="imagen">
 						
@@ -171,6 +237,9 @@
 	        <div class="modal-footer">
 	          <button type="button" id="c_m_a" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 	        </div>
+
+
+
 	     	</div>
 	    	  
 		    </div>
