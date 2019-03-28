@@ -55,6 +55,7 @@ $(document).ready(function(){
         });
     });  
 	//Valores base de datos en inputs.	
+	/*
 	var url="https://paulina96madrid.000webhostapp.com/datosPrueba/datos.php";
 		$.getJSON(url,function(result){
 			console.log(result);
@@ -69,5 +70,5 @@ $(document).ready(function(){
 				$("#fullname").val(fullname);
 				$("#password").val(password);
 			});
-		});
+		}); */
 });
