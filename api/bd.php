@@ -1,6 +1,6 @@
 <?php 
 //para servidor practic.cash:
-  $con="host=ticketfacil.ec port=5432 dbname=practic password=practicash@2019 user=pabloreyess";
+  $con="host=ticketfacil.ec port=5432 dbname=practic password=practicash@2019 user=pabloreyes";
 
   //para servidor local:
   //$con="host=localhost port=5432 dbname=practic password=123456 user=postgres";
